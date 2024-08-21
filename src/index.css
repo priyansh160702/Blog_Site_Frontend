@@ -16,3 +16,8 @@ body{
   max-width: 75rem;
   margin: 0 auto;
 }
+
+/* Navbar */
+.auth-btn{
+  @apply py-1 px-3 hover:scale-90 cursor-pointer transition-all duration-200 border-2 border-black
+}
