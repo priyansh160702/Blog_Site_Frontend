@@ -17,7 +17,37 @@ body{
   margin: 0 auto;
 }
 
-/* Navbar */
-.auth-btn{
+/* Utility */
+.btn-white{
   @apply py-1 px-3 hover:scale-90 cursor-pointer transition-all duration-200 border-2 border-black
+}
+.btn-black{
+  @apply py-1 px-3 hover:scale-90 hover:bg-opacity-80 cursor-pointer transition-all duration-200 border-2 border-black bg-black text-white 
+}
+
+/* Form */
+.form-content{
+  @apply flex flex-col space-y-4 py-8
+}
+
+.form-content input{
+  @apply bg-gray-300 rounded-sm border-none outline-none p-2 placeholder:text-gray-500 focus:bg-white focus:border focus:outline-black transition-all duration-500
+}
+
+.form-content input:not(:placeholder-shown) {   /* When placeholder is not shown. This means that the input have some content. */
+  @apply bg-white outline-black;
+}
+
+.form-content .password-btn {
+  @apply absolute right-3 top-2;
+}
+
+/* Hide the button by default */
+.form-content .password-btn {
+  @apply hidden;
+}
+
+/* Show the button when the input has content */
+.form-content input:not(:placeholder-shown) + .password-btn {
+  @apply block;
 }

@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import useDocumentTitle from "../util/hooks/use-documentTitle";
 import Navbar from "./Navbar";
@@ -23,6 +23,7 @@ const RootLayout = () => {
   return (
     <Fragment>
       <Navbar />
+      <Outlet />
     </Fragment>
   );
 };
