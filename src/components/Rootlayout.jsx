@@ -12,7 +12,7 @@ const RootLayout = () => {
 
   if (path === "/login") {
     title = "Login";
-  } else if (path === "/signup") {
+  } else if (path === "/create-account") {
     title = "Create Account";
   } else {
     title = "Nest-level Blogs";
