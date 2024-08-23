@@ -16,6 +16,10 @@ const AuthForm = ({
   const [nameErrorMessage, setNameErrorMessage] = useState(null);
   const [emailErrorMessage, setEmailErrorMessage] = useState(null);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState(null);
+  const [
+    incorrectCredentialsErrorMessage,
+    setIncorrectCredentialsErrorMessage,
+  ] = useState(null);
 
   const firstNameInputRef = useRef();
   const emailInputRef = useRef();
@@ -44,6 +48,9 @@ const AuthForm = ({
       if (errors.password) {
         setPasswordErrorMessage(errors.password);
       }
+      if (errors.incorrectCredentials) {
+        setIncorrectCredentialsErrorMessage(errors.incorrectCredentials);
+      }
     }
   }, [errors]);
 
@@ -57,10 +64,12 @@ const AuthForm = ({
 
   const emailChangeHandler = () => {
     setEmailErrorMessage(null);
+    setIncorrectCredentialsErrorMessage(null);
   };
 
   const passwordChangeHandler = () => {
     setPasswordErrorMessage(null);
+    setIncorrectCredentialsErrorMessage(null);
   };
 
   return (
@@ -102,11 +111,20 @@ const AuthForm = ({
               </div>
             )}
             <div className="w-full flex flex-col">
+              {incorrectCredentialsErrorMessage && (
+                <p className="text-red-500 -mt-5 mb-2">
+                  {incorrectCredentialsErrorMessage}
+                </p>
+              )}
               <input
                 type="email"
                 name="email"
                 placeholder="Email"
-                className={emailErrorMessage ? "error-input" : "no-error-input"}
+                className={
+                  emailErrorMessage || incorrectCredentialsErrorMessage
+                    ? "error-input"
+                    : "no-error-input"
+                }
                 ref={emailInputRef}
                 onChange={emailChangeHandler}
               />
@@ -122,7 +140,7 @@ const AuthForm = ({
                   placeholder="Enter your password"
                   onChange={passwordChangeHandler}
                   className={
-                    passwordErrorMessage
+                    passwordErrorMessage || incorrectCredentialsErrorMessage
                       ? "error-input w-full"
                       : "no-error-input w-full"
                   }
