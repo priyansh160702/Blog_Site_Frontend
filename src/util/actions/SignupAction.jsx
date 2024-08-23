@@ -32,7 +32,7 @@ const signupAction = async ({ request, params }) => {
     password,
   };
 
-  const response = await fetch(import.meta.env.VITE_API_URL, {
+  const response = await fetch(`${api_url}/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

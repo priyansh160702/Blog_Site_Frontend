@@ -3,7 +3,7 @@ import { GET_BLOGS } from "../Graphql";
 const getBlogsLoader = async ({ request, params }) => {
   const api_url = import.meta.env.VITE_API_URL;
 
-  const response = await fetch(api_url, {
+  const response = await fetch(`${api_url}/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,9 +15,9 @@ const getBlogsLoader = async ({ request, params }) => {
 
   const resData = await response.json();
 
-  console.log(resData);
+  const blogs = resData.data.getBlogs;
 
-  return null;
+  return blogs;
 };
 
 export default getBlogsLoader;

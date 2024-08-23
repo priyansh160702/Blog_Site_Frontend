@@ -4,6 +4,8 @@ import { LOGIN_MUTATION } from "../Graphql";
 import { validateForm } from "../Validation";
 
 const loginAction = async ({ request, params }) => {
+  const api_url = import.meta.env.VITE_API_URL;
+
   const formData = await request.formData();
 
   const email = formData.get("email").trim();
@@ -22,7 +24,7 @@ const loginAction = async ({ request, params }) => {
     password,
   };
 
-  const response = await fetch(import.meta.env.VITE_API_URL, {
+  const response = await fetch(`${api_url}/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
