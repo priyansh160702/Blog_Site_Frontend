@@ -15,11 +15,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    loader: getBlogsLoader,
+    id: "root",
     children: [
       {
         index: true,
         element: <HomePage />,
-        loader: getBlogsLoader,
       },
       {
         path: "/create-account",
