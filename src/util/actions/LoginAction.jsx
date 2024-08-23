@@ -1,4 +1,5 @@
 import { redirect } from "react-router-dom";
+
 import { LOGIN_MUTATION } from "../Graphql";
 import { validateForm } from "../Validation";
 
@@ -43,6 +44,10 @@ const loginAction = async ({ request, params }) => {
 
     return errors;
   }
+
+  const { token } = resData.data.login;
+
+  localStorage.setItem("token", token);
 
   return redirect("/");
 };

@@ -1,12 +1,32 @@
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+
+import useLogout from "../util/hooks/use-logout";
 
 const Navbar = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    !!localStorage.getItem("token")
+  );
+
   const location = useLocation();
+
+  const updateAuthState = () => {
+    setIsAuthenticated(!!localStorage.getItem("token"));
+  };
+
+  useEffect(() => {
+    updateAuthState();
+  }, [location]);
+
+  const logout = useLogout(updateAuthState);
 
   const path = location.pathname;
 
-  const showAuth = path !== "/login" && path !== "/create-account";
+  const showAuth =
+    path !== "/login" && path !== "/create-account" && !isAuthenticated;
+
+  const showLogout =
+    path !== "/login" && path !== "/create-account" && isAuthenticated;
 
   return (
     <nav className="py-4 mb-7">
@@ -26,6 +46,8 @@ const Navbar = () => {
             </div>
           </div>
         )}
+
+        {showLogout && <button onClick={logout}>Logout</button>}
       </div>
     </nav>
   );
