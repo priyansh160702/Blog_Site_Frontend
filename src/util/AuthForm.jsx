@@ -75,7 +75,7 @@ const AuthForm = ({
   return (
     <div className="container">
       <div className="mx-auto w-[35rem] shadow-xl px-11 py-5">
-        <h1 className="mb-3 text-4xl font-semibold">{title}</h1>
+        <h1 className="title">{title}</h1>
         <h2>
           {linkDesc}?{" "}
           <Link className="text-blue-800 underline" to={`/${link}`}>

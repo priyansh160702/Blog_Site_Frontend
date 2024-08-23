@@ -28,3 +28,20 @@ export const GET_BLOGS = `
         }
     }
 `;
+
+export const GET_BLOG_BY_ID = `
+    query GetBlogsById($blogId:Int!){
+        getBlogById(blogId:$blogId){
+            title
+            subTitle
+            category
+            content
+            image
+            createdAt
+            user{
+                id
+                name
+            }
+        }
+    }
+`;
