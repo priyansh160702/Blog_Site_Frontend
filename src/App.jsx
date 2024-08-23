@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import RootLayout from "./components/Rootlayout";
+import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import signupAction from "./util/actions/SignupAction";
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
       {
         path: "/create-account",
         element: <SignupPage />,

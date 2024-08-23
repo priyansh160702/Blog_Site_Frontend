@@ -25,9 +25,6 @@ const Navbar = () => {
   const showAuth =
     path !== "/login" && path !== "/create-account" && !isAuthenticated;
 
-  const showLogout =
-    path !== "/login" && path !== "/create-account" && isAuthenticated;
-
   return (
     <nav className="py-4 mb-7">
       <div className="container flex justify-between items-center">
@@ -47,7 +44,7 @@ const Navbar = () => {
           </div>
         )}
 
-        {showLogout && <button onClick={logout}>Logout</button>}
+        {isAuthenticated && <button onClick={logout}>Logout</button>}
       </div>
     </nav>
   );
