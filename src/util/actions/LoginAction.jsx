@@ -22,7 +22,7 @@ const loginAction = async ({ request, params }) => {
     password,
   };
 
-  const response = await fetch("http://localhost:8080/graphql", {
+  const response = await fetch(import.meta.env.VITE_API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
