@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { Form, Link, useActionData } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
@@ -13,8 +13,54 @@ const AuthForm = ({
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const [nameErrorMessage, setNameErrorMessage] = useState(null);
+  const [emailErrorMessage, setEmailErrorMessage] = useState(null);
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState(null);
+
+  const firstNameInputRef = useRef();
+  const emailInputRef = useRef();
+
+  const errors = useActionData();
+
+  if (newAccount) {
+    useEffect(() => {
+      firstNameInputRef.current.focus();
+    }, []);
+  }
+  if (!newAccount) {
+    useEffect(() => {
+      emailInputRef.current.focus();
+    }, []);
+  }
+
+  useEffect(() => {
+    if (errors) {
+      if (errors.firstName) {
+        setNameErrorMessage(errors.firstName);
+      }
+      if (errors.email) {
+        setEmailErrorMessage(errors.email);
+      }
+      if (errors.password) {
+        setPasswordErrorMessage(errors.password);
+      }
+    }
+  }, [errors]);
+
   const passwordStateHandler = () => {
     setShowPassword((showPassword) => !showPassword);
+  };
+
+  const nameChangeHandler = () => {
+    setNameErrorMessage(null);
+  };
+
+  const emailChangeHandler = () => {
+    setEmailErrorMessage(null);
+  };
+
+  const passwordChangeHandler = () => {
+    setPasswordErrorMessage(null);
   };
 
   return (
@@ -27,39 +73,83 @@ const AuthForm = ({
             {linkTitle}
           </Link>
         </h2>
-        <form noValidate>
+        <Form method="post" noValidate>
           <div className="form-content">
             {newAccount && (
               <div className="flex justify-between">
-                <input type="text" placeholder="First Name" />
-                <input type="text" placeholder="Last Name" />
+                <div>
+                  <input
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name"
+                    onChange={nameChangeHandler}
+                    className={
+                      nameErrorMessage ? "error-input" : "no-error-input"
+                    }
+                    ref={firstNameInputRef}
+                  />
+                  {nameErrorMessage && (
+                    <p className="mt-2 text-red-500">{nameErrorMessage}</p>
+                  )}
+                </div>
+
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Last Name"
+                  className="no-error-input"
+                />
               </div>
             )}
-            <input type="email" placeholder="Email" />
-            <div className="relative">
+            <div className="w-full flex flex-col">
               <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
-                className="w-full"
+                type="email"
+                name="email"
+                placeholder="Email"
+                className={emailErrorMessage ? "error-input" : "no-error-input"}
+                ref={emailInputRef}
+                onChange={emailChangeHandler}
               />
-              <button
-                type="button"
-                className="password-btn"
-                onClick={passwordStateHandler}
-              >
-                {showPassword ? (
-                  <FontAwesomeIcon icon={faEyeSlash} />
-                ) : (
-                  <FontAwesomeIcon icon={faEye} />
-                )}
-              </button>
+              {emailErrorMessage && (
+                <p className="mt-2 text-red-500">{emailErrorMessage}</p>
+              )}
+            </div>
+            <div className="relative">
+              <div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Enter your password"
+                  onChange={passwordChangeHandler}
+                  className={
+                    passwordErrorMessage
+                      ? "error-input w-full"
+                      : "no-error-input w-full"
+                  }
+                />
+
+                <button
+                  type="button"
+                  className="password-btn"
+                  onClick={passwordStateHandler}
+                >
+                  {showPassword ? (
+                    <FontAwesomeIcon icon={faEyeSlash} />
+                  ) : (
+                    <FontAwesomeIcon icon={faEye} />
+                  )}
+                </button>
+              </div>
+              {passwordErrorMessage && (
+                <p className="mt-2 text-red-500">{passwordErrorMessage}</p>
+              )}
             </div>
           </div>
 
           <button type="submit" className="mx-auto flex btn-black">
             {btnTitle}
           </button>
-        </form>
+        </Form>
       </div>
     </div>
   );
