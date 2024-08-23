@@ -13,3 +13,18 @@ export const LOGIN_MUTATION = `
         }
     }
 `;
+
+export const GET_BLOGS = `
+    query{
+        getBlogs {
+            id
+            title
+            subTitle
+            category
+            image
+            user{
+                name
+            }             
+        }
+    }
+`;

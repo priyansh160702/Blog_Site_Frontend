@@ -6,6 +6,7 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import signupAction from "./util/actions/SignupAction";
 import loginAction from "./util/actions/LoginAction";
+import getBlogsLoader from "./util/loaders/getBlogsLoader";
 
 // Router
 const router = createBrowserRouter([
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+        loader: getBlogsLoader,
       },
       {
         path: "/create-account",
