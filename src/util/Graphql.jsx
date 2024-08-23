@@ -5,3 +5,11 @@ export const SIGNUP_MUTATION = `
         }
     }
 `;
+
+export const LOGIN_MUTATION = `
+    mutation Login($loginData: LoginDataDto!){
+        login(loginData:$loginData) {
+            token
+        }
+    }
+`;
