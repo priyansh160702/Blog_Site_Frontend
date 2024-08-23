@@ -4,9 +4,11 @@ import RootLayout from "./components/Rootlayout";
 import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
+import BlogPage from "./pages/BlogPage";
 import signupAction from "./util/actions/SignupAction";
 import loginAction from "./util/actions/LoginAction";
 import getBlogsLoader from "./util/loaders/getBlogsLoader";
+import getBlogByIdLoader from "./util/loaders/getBlogByIdLoader";
 
 // Router
 const router = createBrowserRouter([
@@ -25,6 +27,11 @@ const router = createBrowserRouter([
         action: signupAction,
       },
       { path: "/login", element: <LoginPage />, action: loginAction },
+      {
+        path: "blog/:blogId",
+        element: <BlogPage />,
+        loader: getBlogByIdLoader,
+      },
     ],
   },
 ]);
