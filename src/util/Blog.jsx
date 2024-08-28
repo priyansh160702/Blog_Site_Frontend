@@ -5,7 +5,7 @@ const Blog = ({ blog }) => {
 
   return (
     <li key={blog.id} className="m-5 max-h-[10rem] border border-red-500">
-      <Link to={`blog/${blog.id}`} className=" text-center">
+      <Link to={`/blog/${blog.id}`} className=" text-center">
         <h2 className="text-left">{blog.category}</h2>
         {blog.image && (
           <div className="h-48 w-full overflow-hidden">

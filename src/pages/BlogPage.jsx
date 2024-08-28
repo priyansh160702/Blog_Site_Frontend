@@ -1,29 +1,48 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useRouteLoaderData } from "react-router-dom";
 
 import dateFormatter from "../util/dateFormatter";
+import { Fragment } from "react";
+import Blog from "../util/Blog";
+import BlogsByUserSection from "../components/BlogsByUserSection";
+import BlogsByCategorySection from "../components/BlogsByCategorySection";
 
 const BlogPage = () => {
   const api_url = import.meta.env.VITE_API_URL;
 
-  const { title, subTitle, category, content, image, createdAt, user } =
+  const { id, title, subTitle, category, content, image, createdAt, user } =
     useLoaderData();
+
+  const data = useRouteLoaderData("root");
 
   const date = dateFormatter(createdAt);
 
-  console.log(date);
+  const blogsByUser = data
+    .filter((blog) => blog.user.id === user.id && blog.id !== id)
+    .map((blog) => <Blog key={blog.id} blog={blog} />);
+
+  const blogsByCategory = data
+    .filter((blog) => blog.category === category && blog.id !== id)
+    .map((blog) => <Blog key={blog.id} blog={blog} />);
 
   return (
-    <main>
-      <div className="container text-center">
-        <img src={`${api_url}/${image}`} alt="" />
-        <h2 className="">{category}</h2>
-        <h1 className="title">{title}</h1>
-        <h2>{subTitle}</h2>
-        <h2>~By {user.name}</h2>
-        <h2>{date}</h2>
-        <p className="text-left mt-5">{content}</p>
-      </div>
-    </main>
+    <Fragment>
+      <main>
+        <div className="container text-center">
+          <img src={`${api_url}/${image}`} alt="" />
+          <h2 className="">{category}</h2>
+          <h1 className="title">{title}</h1>
+          <h2>{subTitle}</h2>
+          <h2>~By {user.name}</h2>
+          <h2>{date}</h2>
+          <p className="text-left mt-5">{content}</p>
+        </div>
+      </main>
+      <BlogsByUserSection userName={user.name} blogsByUser={blogsByUser} />
+      <BlogsByCategorySection
+        category={category}
+        blogsByCategory={blogsByCategory}
+      />
+    </Fragment>
   );
 };
 

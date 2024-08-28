@@ -20,6 +20,8 @@ const getBlogByIdLoader = async ({ request, params }) => {
 
   const blogData = resData.data.getBlogById;
 
+  blogData.id = blogId;
+
   return blogData;
 };
 

@@ -1,6 +1,6 @@
 import { useRouteLoaderData } from "react-router-dom";
 
-import Blog from "../custom-components/Blog";
+import Blog from "../util/Blog";
 
 const HomePage = () => {
   const blogsData = useRouteLoaderData("root");
