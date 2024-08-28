@@ -9,6 +9,7 @@ import signupAction from "./util/actions/SignupAction";
 import loginAction from "./util/actions/LoginAction";
 import getBlogsLoader from "./util/loaders/getBlogsLoader";
 import getBlogByIdLoader from "./util/loaders/getBlogByIdLoader";
+import createBlogAction from "./util/actions/CreateBlogAction";
 
 // Router
 const router = createBrowserRouter([
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+        action: createBlogAction,
       },
       {
         path: "/create-account",
