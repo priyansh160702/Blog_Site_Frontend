@@ -37,19 +37,24 @@ body{
 @apply placeholder:text-black bg-red-500 !important;
 }
 
+/* Navbar */
+.navbar{
+  @apply py-4 mb-7 sticky top-0 bg-white
+}
+
 /* Form */
 .form-content{
   @apply flex flex-col space-y-4 py-8
 }
 
-.form-content input, .modal input{
+.form-content input, .modal input,.modal textarea{
   @apply  rounded-sm border-none px-2 h-11 focus:border focus:outline-black transition-all duration-500  
 }
-
- 
+  
 .form-content input:not(:placeholder-shown),
   .modal input:not(:placeholder-shown),
-  .modal select:not(:placeholder-shown){   /* When placeholder is not shown. This means that the input have some content. */
+  .modal select:not(:placeholder-shown),
+  .modal textarea:not(:placeholder-shown){   /* When placeholder is not shown. This means that the input have some content. */
     @apply bg-white outline-black;
   }
 

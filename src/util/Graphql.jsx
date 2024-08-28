@@ -46,3 +46,11 @@ export const GET_BLOG_BY_ID = `
         }
     }
 `;
+
+export const CREATE_BLOG_MUTATION = `
+    mutation CreateBlog($blogData:BlogDataDto!){
+        createBlog(blogData:$blogData){
+            id
+        }
+    }
+`;
