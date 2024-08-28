@@ -1,11 +1,16 @@
 import { Outlet, useLocation } from "react-router-dom";
+import { Fragment, useEffect } from "react";
 
 import useDocumentTitle from "../util/hooks/use-documentTitle";
 import Navbar from "./Navbar";
-import { Fragment } from "react";
 
 const RootLayout = () => {
   const location = useLocation();
+
+  // Scroll Restoration
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location]);
 
   const path = location.pathname;
   let title;
