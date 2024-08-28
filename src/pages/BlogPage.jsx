@@ -37,11 +37,15 @@ const BlogPage = () => {
           <p className="text-left mt-5">{content}</p>
         </div>
       </main>
-      <BlogsByUserSection userName={user.name} blogsByUser={blogsByUser} />
-      <BlogsByCategorySection
-        category={category}
-        blogsByCategory={blogsByCategory}
-      />
+      {blogsByUser.length > 0 && (
+        <BlogsByUserSection userName={user.name} blogsByUser={blogsByUser} />
+      )}
+      {blogsByCategory.length > 0 && (
+        <BlogsByCategorySection
+          category={category}
+          blogsByCategory={blogsByCategory}
+        />
+      )}
     </Fragment>
   );
 };

@@ -1,24 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import useLogout from "../util/hooks/use-logout";
+import useAuthentication from "../util/hooks/use-authentication";
 
 const Navbar = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("token")
-  );
+  const { isAuthenticated, updateAuthState, logout } = useAuthentication();
 
   const location = useLocation();
-
-  const updateAuthState = () => {
-    setIsAuthenticated(!!localStorage.getItem("token"));
-  };
 
   useEffect(() => {
     updateAuthState();
   }, [location]);
 
-  const logout = useLogout(updateAuthState);
+  const logoutHandler = () => {
+    logout();
+  };
 
   const path = location.pathname;
 
@@ -44,7 +40,7 @@ const Navbar = () => {
           </div>
         )}
 
-        {isAuthenticated && <button onClick={logout}>Logout</button>}
+        {isAuthenticated && <button onClick={logoutHandler}>Logout</button>}
       </div>
     </nav>
   );
