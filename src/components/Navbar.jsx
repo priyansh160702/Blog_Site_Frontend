@@ -32,7 +32,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="py-4 mb-7">
+    <nav className="navbar">
       <div className="container flex justify-between items-center">
         <Link to="/">
           <h1 className="font-semibold text-2xl">Nest-Level Blogs</h1>

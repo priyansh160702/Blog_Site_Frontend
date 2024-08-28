@@ -1,26 +1,38 @@
-import { useEffect } from "react";
 import { Form } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import Modal from "../util/Modal";
+import { modalActions } from "../redux/store";
 
 const CreateBlogForm = () => {
-  useEffect(() => {
-    const inputs = document.querySelectorAll("#blog-form input");
+  const dispatch = useDispatch();
 
-    inputs.forEach((input, index) => {
-      if (index < 3) {
-        input.classList.add("no-error-input");
-      }
-    });
-  }, []);
+  const formSubmitHandler = () => {
+    dispatch(modalActions.hideModal());
+  };
 
   return (
     <Modal backdrop={true}>
       <h1 className="text-center text-xl font-semibold mb-4">Create Blog</h1>
-      <Form encType="multipart/form-data">
+      <Form
+        method="post"
+        onSubmit={formSubmitHandler}
+        encType="multipart/form-data"
+        noValidate
+      >
         <div id="blog-form" className="flex flex-col space-y-4">
-          <input type="text" placeholder="Title" name="title" />
-          <input type="text" placeholder="Sub Title" name="subTitle" />
+          <input
+            type="text"
+            placeholder="Title"
+            name="title"
+            className="no-error-input"
+          />
+          <input
+            type="text"
+            placeholder="Sub Title"
+            name="subTitle"
+            className="no-error-input"
+          />
           <select name="category" className="no-error-input py-2">
             <option disabled defaultValue={true}>
               Select a category
@@ -32,7 +44,13 @@ const CreateBlogForm = () => {
             <option value="travel">Travel</option>
           </select>
 
-          <input type="text" placeholder="Content" name="content" />
+          <textarea
+            rows={12}
+            cols={12}
+            placeholder="Content"
+            name="content"
+            className="no-error-input pt-1 pb-20"
+          ></textarea>
           <input type="file" name="blogImage" />
           <button type="submit" className="btn-black">
             Create
