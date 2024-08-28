@@ -26,11 +26,13 @@ const createBlogAction = async ({ request, params }) => {
     errors.content = requiredErrorString;
   }
 
+  console.log(typeof blogImage.type);
+
   if (blogImage.size > 0) {
     const allowedMimeTypes = ["image/jpeg", "image/jpg", "image/png"];
-    const imageSizeInMb = blogImage.size / 1024;
+    const imageSizeInMb = blogImage.size / (1024 * 1024);
 
-    if (!allowedMimeTypes.includes(blogImage.mimetype)) {
+    if (!allowedMimeTypes.includes(blogImage.type)) {
       errors.blogImage = "Image must only be in jpeg/jpg/png!";
     } else if (imageSizeInMb > 5) {
       errors.blogImage = "Size must not be greater than 5 MB!";
@@ -38,6 +40,8 @@ const createBlogAction = async ({ request, params }) => {
   }
 
   if (Object.keys(errors).length > 0) {
+    console.log(errors);
+
     return errors;
   }
 
@@ -62,7 +66,21 @@ const createBlogAction = async ({ request, params }) => {
 
   const createdBlog = await blogDataResponse.json();
 
-  console.log(createdBlog);
+  const blogId = createdBlog.data.createBlog.id;
+
+  if (blogImage.size > 0) {
+    const imageData = new FormData();
+    imageData.append("blogId", blogId);
+    imageData.append("image", blogImage);
+
+    await fetch(`${api_url}/upload/blog`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: imageData, // Use FormData for file upload
+    });
+  }
 
   return redirect("/");
 };
