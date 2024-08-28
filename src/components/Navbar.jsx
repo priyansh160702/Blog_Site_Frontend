@@ -1,12 +1,18 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
 
 import useAuthentication from "../util/hooks/use-authentication";
+import { modalActions } from "../redux/store";
 
 const Navbar = () => {
   const { isAuthenticated, updateAuthState, logout } = useAuthentication();
 
   const location = useLocation();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     updateAuthState();
@@ -20,6 +26,10 @@ const Navbar = () => {
 
   const showAuth =
     path !== "/login" && path !== "/create-account" && !isAuthenticated;
+
+  const writeBlogHandler = () => {
+    dispatch(modalActions.showModal());
+  };
 
   return (
     <nav className="py-4 mb-7">
@@ -40,7 +50,18 @@ const Navbar = () => {
           </div>
         )}
 
-        {isAuthenticated && <button onClick={logoutHandler}>Logout</button>}
+        {isAuthenticated && (
+          <div className="flex space-x-3">
+            <button
+              onClick={writeBlogHandler}
+              className="flex items-center space-x-1"
+            >
+              <FontAwesomeIcon icon={faPen} />
+              <span>Write</span>
+            </button>
+            <button onClick={logoutHandler}>Logout</button>
+          </div>
+        )}
       </div>
     </nav>
   );

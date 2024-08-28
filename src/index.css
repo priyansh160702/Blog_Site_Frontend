@@ -29,26 +29,29 @@ body{
   @apply mb-3 text-4xl font-semibold
 }
 
+.no-error-input{
+@apply bg-gray-300 focus:bg-white outline-none  placeholder:text-gray-500
+}
+
+.error-input{
+@apply placeholder:text-black bg-red-500 !important;
+}
+
 /* Form */
 .form-content{
   @apply flex flex-col space-y-4 py-8
 }
 
-.form-content input{
+.form-content input, .modal input{
   @apply  rounded-sm border-none px-2 h-11 focus:border focus:outline-black transition-all duration-500  
 }
 
- .form-content .no-error-input{
-  @apply bg-gray-300 focus:bg-white outline-none  placeholder:text-gray-500
- }
-
- .form-content .error-input{
-  @apply placeholder:text-black bg-red-500 !important;
- }
  
-.form-content input:not(:placeholder-shown) {   /* When placeholder is not shown. This means that the input have some content. */
-  @apply bg-white outline-black;
-}
+.form-content input:not(:placeholder-shown),
+  .modal input:not(:placeholder-shown),
+  .modal select:not(:placeholder-shown){   /* When placeholder is not shown. This means that the input have some content. */
+    @apply bg-white outline-black;
+  }
 
 .form-content .password-btn {
   @apply absolute right-3 top-3;
@@ -65,9 +68,8 @@ body{
 }
 
 /* Modal */
-
 .modal{
-  @apply fixed z-30
+  @apply fixed z-30 bg-white rounded-md p-5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
 }
 
 .backdrop{
