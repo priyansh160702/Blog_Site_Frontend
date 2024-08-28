@@ -23,6 +23,7 @@ export const GET_BLOGS = `
             category
             image
             user{
+                id
                 name
             }             
         }
