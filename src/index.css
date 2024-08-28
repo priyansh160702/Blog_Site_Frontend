@@ -63,3 +63,13 @@ body{
 .form-content input:not(:placeholder-shown) + .password-btn {
   @apply block;
 }
+
+/* Modal */
+
+.modal{
+  @apply fixed z-30
+}
+
+.backdrop{
+  @apply fixed top-0 left-0 w-full h-screen z-20 bg-[rgba(0,0,0,0.75)]
+}
