@@ -74,7 +74,7 @@ body{
 
 /* Modal */
 .modal{
-  @apply fixed z-30 bg-white rounded-md p-5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+  @apply fixed z-30 bg-white rounded-md p-5 
 }
 
 #backdrop{

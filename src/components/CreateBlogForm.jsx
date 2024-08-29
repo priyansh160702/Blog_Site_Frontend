@@ -64,7 +64,10 @@ const CreateBlogForm = () => {
   };
 
   return (
-    <Modal backdrop={true}>
+    <Modal
+      backdrop={true}
+      className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+    >
       <h1 className="text-center text-xl font-semibold mb-4">Create Blog</h1>
       <Form method="post" encType="multipart/form-data" noValidate>
         <div id="blog-form" className="flex flex-col space-y-4">

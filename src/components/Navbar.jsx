@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
+import { Avatar } from "flowbite-react";
 
 import useAuthentication from "../util/hooks/use-authentication";
 import { modalActions } from "../redux/store";
@@ -51,7 +52,7 @@ const Navbar = () => {
         )}
 
         {isAuthenticated && (
-          <div className="flex space-x-3">
+          <div className="flex justify-center items-center space-x-5">
             <button
               onClick={writeBlogHandler}
               className="flex items-center space-x-1"
@@ -59,7 +60,10 @@ const Navbar = () => {
               <FontAwesomeIcon icon={faPen} />
               <span>Write</span>
             </button>
-            <button onClick={logoutHandler}>Logout</button>
+            <button>
+              <Avatar rounded className="hover:cursor-pointer" />
+            </button>
+            {/* <button onClick={logoutHandler}>Logout</button> */}
           </div>
         )}
       </div>

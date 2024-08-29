@@ -35,7 +35,9 @@ const Modal = (props) => {
     <Fragment>
       {ReactDom.createPortal(<Backdrop backdrop={props.backdrop} />, port)}
       {ReactDom.createPortal(
-        <ModalOverlay>{props.children}</ModalOverlay>,
+        <ModalOverlay className={props.className}>
+          {props.children}
+        </ModalOverlay>,
         port
       )}
     </Fragment>
