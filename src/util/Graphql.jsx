@@ -54,3 +54,11 @@ export const CREATE_BLOG_MUTATION = `
         }
     }
 `;
+
+export const FORGOT_PASSWORD_MUTATION = `
+    mutation ForgotPassword($userMail:String!){
+        forgotPassword(userMail:$userMail){
+            message
+        }
+    }
+`;

@@ -10,7 +10,8 @@ import loginAction from "./util/actions/LoginAction";
 import getBlogsLoader from "./util/loaders/getBlogsLoader";
 import getBlogByIdLoader from "./util/loaders/getBlogByIdLoader";
 import createBlogAction from "./util/actions/CreateBlogAction";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
+import PasswordRecoveryPage from "./pages/PasswordRecoveryPage";
+import passwordRecoveryAction from "./util/actions/PasswordRecoveryAction";
 
 // Router
 const router = createBrowserRouter([
@@ -37,8 +38,9 @@ const router = createBrowserRouter([
         loader: getBlogByIdLoader,
       },
       {
-        path: "reset-password",
-        element: <ResetPasswordPage />,
+        path: "password-recovery",
+        element: <PasswordRecoveryPage />,
+        action: passwordRecoveryAction,
       },
     ],
   },

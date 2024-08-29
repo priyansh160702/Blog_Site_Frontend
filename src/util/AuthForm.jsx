@@ -167,7 +167,7 @@ const AuthForm = ({
                 {!newAccount && (
                   <div className="flex justify-end">
                     <Link
-                      to="/reset-password"
+                      to="/password-recovery"
                       className="text-blue-800 underline mt-1"
                     >
                       Forgot password?
