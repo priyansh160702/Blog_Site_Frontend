@@ -10,6 +10,7 @@ import loginAction from "./util/actions/LoginAction";
 import getBlogsLoader from "./util/loaders/getBlogsLoader";
 import getBlogByIdLoader from "./util/loaders/getBlogByIdLoader";
 import createBlogAction from "./util/actions/CreateBlogAction";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 // Router
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         path: "blog/:blogId",
         element: <BlogPage />,
         loader: getBlogByIdLoader,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPasswordPage />,
       },
     ],
   },

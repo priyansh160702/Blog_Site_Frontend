@@ -10,6 +10,7 @@ const AuthForm = ({
   linkTitle,
   newAccount,
   btnTitle,
+  resetPassword,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -76,12 +77,14 @@ const AuthForm = ({
     <div className="container">
       <div className="mx-auto w-[35rem] shadow-xl px-11 py-5">
         <h1 className="title">{title}</h1>
-        <h2>
-          {linkDesc}?{" "}
-          <Link className="text-blue-800 underline" to={`/${link}`}>
-            {linkTitle}
-          </Link>
-        </h2>
+        {!resetPassword && (
+          <h2>
+            {linkDesc}?{" "}
+            <Link className="text-blue-800 underline" to={`/${link}`}>
+              {linkTitle}
+            </Link>
+          </h2>
+        )}
         <Form method="post" noValidate>
           <div className="form-content">
             {newAccount && (
@@ -119,7 +122,9 @@ const AuthForm = ({
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder={
+                  !resetPassword ? "Email" : "Enter Registered Email"
+                }
                 className={
                   emailErrorMessage || incorrectCredentialsErrorMessage
                     ? "error-input"
@@ -132,36 +137,48 @@ const AuthForm = ({
                 <p className="mt-2 text-red-500">{emailErrorMessage}</p>
               )}
             </div>
-            <div className="relative">
-              <div>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="Enter your password"
-                  onChange={passwordChangeHandler}
-                  className={
-                    passwordErrorMessage || incorrectCredentialsErrorMessage
-                      ? "error-input w-full"
-                      : "no-error-input w-full"
-                  }
-                />
+            {!resetPassword && (
+              <div className="relative">
+                <div>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Enter your password"
+                    onChange={passwordChangeHandler}
+                    className={
+                      passwordErrorMessage || incorrectCredentialsErrorMessage
+                        ? "error-input w-full"
+                        : "no-error-input w-full"
+                    }
+                  />
 
-                <button
-                  type="button"
-                  className="password-btn"
-                  onClick={passwordStateHandler}
-                >
-                  {showPassword ? (
-                    <FontAwesomeIcon icon={faEyeSlash} />
-                  ) : (
-                    <FontAwesomeIcon icon={faEye} />
-                  )}
-                </button>
+                  <button
+                    type="button"
+                    className="password-btn"
+                    onClick={passwordStateHandler}
+                  >
+                    {showPassword ? (
+                      <FontAwesomeIcon icon={faEyeSlash} />
+                    ) : (
+                      <FontAwesomeIcon icon={faEye} />
+                    )}
+                  </button>
+                </div>
+                {!newAccount && (
+                  <div className="flex justify-end">
+                    <Link
+                      to="/reset-password"
+                      className="text-blue-800 underline mt-1"
+                    >
+                      Forgot password?
+                    </Link>
+                  </div>
+                )}
+                {passwordErrorMessage && (
+                  <p className="mt-2 text-red-500">{passwordErrorMessage}</p>
+                )}
               </div>
-              {passwordErrorMessage && (
-                <p className="mt-2 text-red-500">{passwordErrorMessage}</p>
-              )}
-            </div>
+            )}
           </div>
 
           <button type="submit" className="mx-auto flex btn-black">
