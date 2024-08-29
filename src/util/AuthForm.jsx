@@ -220,7 +220,7 @@ const AuthForm = ({
                         placeholder="Confirm Password"
                         onChange={confirmPasswordChangeHandler}
                         className={
-                          passwordErrorMessage
+                          confirmPasswordErrorMessage
                             ? "error-input w-full"
                             : "no-error-input w-full"
                         }

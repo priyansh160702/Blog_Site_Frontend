@@ -62,3 +62,11 @@ export const FORGOT_PASSWORD_MUTATION = `
         }
     }
 `;
+
+export const RESET_PASSWORD_MUTATION = `
+    mutation ResetPassword($resetPasswordData:ResetPasswordDto!){
+        resetPassword(resetPasswordData:$resetPasswordData){
+            message
+        }
+    }
+`;
