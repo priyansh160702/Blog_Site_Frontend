@@ -7,6 +7,8 @@ import CreateBlogForm from "../components/CreateBlogForm";
 const HomePage = () => {
   const blogsData = useRouteLoaderData("root");
 
+  const noBlogs = blogsData.length === 0;
+
   const modalIsShown = useSelector((state) => state.modal.modalIsShown);
 
   const blogs = blogsData.map((blog) => {
@@ -16,7 +18,13 @@ const HomePage = () => {
   return (
     <div className="container">
       {modalIsShown && <CreateBlogForm />}
-      <ul className="grid grid-cols-3">{blogs}</ul>
+      {noBlogs ? (
+        <p className="text-center text-red-500 font-bold text-2xl">
+          No Blogs yet!
+        </p>
+      ) : (
+        <ul className="grid grid-cols-3">{blogs}</ul>
+      )}
     </div>
   );
 };
