@@ -9,7 +9,7 @@ const HomePage = () => {
 
   const noBlogs = blogsData.length === 0;
 
-  const modalIsShown = useSelector((state) => state.modal.modalIsShown);
+  const blogModalIsShown = useSelector((state) => state.modal.blogModalIsShown);
 
   const blogs = blogsData.map((blog) => {
     return <Blog key={blog.id} blog={blog} />;
@@ -17,7 +17,7 @@ const HomePage = () => {
 
   return (
     <div className="container">
-      {modalIsShown && <CreateBlogForm />}
+      {blogModalIsShown && <CreateBlogForm />}
       {noBlogs ? (
         <p className="text-center text-red-500 font-bold text-2xl">
           No Blogs yet!

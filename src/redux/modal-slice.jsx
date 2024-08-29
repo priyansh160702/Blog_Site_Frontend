@@ -2,13 +2,23 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const modalSlice = createSlice({
   name: "Modal",
-  initialState: { modalIsShown: false },
+  initialState: { blogModalIsShown: false, userModalIsShown: false },
   reducers: {
-    showModal(state) {
-      state.modalIsShown = true;
+    showModal(state, action) {
+      if (action.payload === "blog") {
+        state.blogModalIsShown = true;
+      }
+      if (action.payload === "user") {
+        state.userModalIsShown = true;
+      }
     },
-    hideModal(state) {
-      state.modalIsShown = false;
+    hideModal(state, action) {
+      if (action.payload === "blog") {
+        state.blogModalIsShown = false;
+      }
+      if (action.payload === "user") {
+        state.userModalIsShown = false;
+      }
     },
   },
 });

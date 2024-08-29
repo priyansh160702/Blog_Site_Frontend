@@ -43,7 +43,7 @@ const CreateBlogForm = () => {
 
   useEffect(() => {
     if (success) {
-      dispatch(modalActions.hideModal());
+      dispatch(modalActions.hideModal("blog"));
     }
   }, [success, dispatch]);
 

@@ -28,7 +28,7 @@ const Navbar = () => {
     path !== "/login" && path !== "/create-account" && !isAuthenticated;
 
   const writeBlogHandler = () => {
-    dispatch(modalActions.showModal());
+    dispatch(modalActions.showModal("blog"));
   };
 
   return (
