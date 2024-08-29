@@ -1,6 +1,6 @@
 import AuthForm from "../util/AuthForm";
 
-const ResetPasswordPage = () => {
+const PasswordRecoveryPage = () => {
   return (
     <AuthForm
       title="Password Recovery"
@@ -10,4 +10,4 @@ const ResetPasswordPage = () => {
   );
 };
 
-export default ResetPasswordPage;
+export default PasswordRecoveryPage;

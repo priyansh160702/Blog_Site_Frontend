@@ -19,6 +19,8 @@ const RootLayout = () => {
     title = "Login";
   } else if (path === "/create-account") {
     title = "Create Account";
+  } else if (path === "/reset-password") {
+    title = "Password Recovery";
   } else {
     title = "Nest-level Blogs";
   }
