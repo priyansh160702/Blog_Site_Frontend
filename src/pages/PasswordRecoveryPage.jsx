@@ -4,7 +4,7 @@ const PasswordRecoveryPage = () => {
   return (
     <AuthForm
       title="Password Recovery"
-      resetPassword={true}
+      passwordRecovery={true}
       btnTitle="Send Reset Link"
     />
   );

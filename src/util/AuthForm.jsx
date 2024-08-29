@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
 import { Form, Link, useActionData } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
@@ -10,13 +10,17 @@ const AuthForm = ({
   linkTitle,
   newAccount,
   btnTitle,
+  passwordRecovery,
   resetPassword,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [nameErrorMessage, setNameErrorMessage] = useState(null);
   const [emailErrorMessage, setEmailErrorMessage] = useState(null);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState(null);
+  const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] =
+    useState(null);
   const [
     incorrectCredentialsErrorMessage,
     setIncorrectCredentialsErrorMessage,
@@ -24,19 +28,27 @@ const AuthForm = ({
 
   const firstNameInputRef = useRef();
   const emailInputRef = useRef();
+  const passwordInputRef = useRef();
 
   const errors = useActionData();
 
-  if (newAccount) {
-    useEffect(() => {
+  useEffect(() => {
+    if (newAccount) {
       firstNameInputRef.current.focus();
-    }, []);
-  }
-  if (!newAccount) {
-    useEffect(() => {
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!newAccount && !resetPassword) {
       emailInputRef.current.focus();
-    }, []);
-  }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (resetPassword) {
+      passwordInputRef.current.focus();
+    }
+  }, []);
 
   useEffect(() => {
     if (errors) {
@@ -49,6 +61,9 @@ const AuthForm = ({
       if (errors.password) {
         setPasswordErrorMessage(errors.password);
       }
+      if (errors.confirmPassword) {
+        setConfirmPasswordErrorMessage(errors.confirmPassword);
+      }
       if (errors.incorrectCredentials) {
         setIncorrectCredentialsErrorMessage(errors.incorrectCredentials);
       }
@@ -57,6 +72,10 @@ const AuthForm = ({
 
   const passwordStateHandler = () => {
     setShowPassword((showPassword) => !showPassword);
+  };
+
+  const confirmPasswordStateHandler = () => {
+    setShowConfirmPassword((confirmPassword) => !confirmPassword);
   };
 
   const nameChangeHandler = () => {
@@ -73,11 +92,15 @@ const AuthForm = ({
     setIncorrectCredentialsErrorMessage(null);
   };
 
+  const confirmPasswordChangeHandler = () => {
+    setConfirmPasswordErrorMessage(null);
+  };
+
   return (
     <div className="container">
       <div className="mx-auto w-[35rem] shadow-xl px-11 py-5">
         <h1 className="title">{title}</h1>
-        {!resetPassword && (
+        {!passwordRecovery && !resetPassword && (
           <h2>
             {linkDesc}?{" "}
             <Link className="text-blue-800 underline" to={`/${link}`}>
@@ -113,71 +136,116 @@ const AuthForm = ({
                 />
               </div>
             )}
-            <div className="w-full flex flex-col">
-              {incorrectCredentialsErrorMessage && (
-                <p className="text-red-500 -mt-5 mb-2">
-                  {incorrectCredentialsErrorMessage}
-                </p>
-              )}
-              <input
-                type="email"
-                name="email"
-                placeholder={
-                  !resetPassword ? "Email" : "Enter Registered Email"
-                }
-                className={
-                  emailErrorMessage || incorrectCredentialsErrorMessage
-                    ? "error-input"
-                    : "no-error-input"
-                }
-                ref={emailInputRef}
-                onChange={emailChangeHandler}
-              />
-              {emailErrorMessage && (
-                <p className="mt-2 text-red-500">{emailErrorMessage}</p>
-              )}
-            </div>
             {!resetPassword && (
-              <div className="relative">
-                <div>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    placeholder="Enter your password"
-                    onChange={passwordChangeHandler}
-                    className={
-                      passwordErrorMessage || incorrectCredentialsErrorMessage
-                        ? "error-input w-full"
-                        : "no-error-input w-full"
-                    }
-                  />
-
-                  <button
-                    type="button"
-                    className="password-btn"
-                    onClick={passwordStateHandler}
-                  >
-                    {showPassword ? (
-                      <FontAwesomeIcon icon={faEyeSlash} />
-                    ) : (
-                      <FontAwesomeIcon icon={faEye} />
-                    )}
-                  </button>
-                </div>
-                {!newAccount && (
-                  <div className="flex justify-end">
-                    <Link
-                      to="/password-recovery"
-                      className="text-blue-800 underline mt-1"
-                    >
-                      Forgot password?
-                    </Link>
-                  </div>
+              <div className="w-full flex flex-col">
+                {incorrectCredentialsErrorMessage && (
+                  <p className="text-red-500 -mt-5 mb-2">
+                    {incorrectCredentialsErrorMessage}
+                  </p>
                 )}
-                {passwordErrorMessage && (
-                  <p className="mt-2 text-red-500">{passwordErrorMessage}</p>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder={
+                    !passwordRecovery ? "Email" : "Enter Registered Email"
+                  }
+                  className={
+                    emailErrorMessage || incorrectCredentialsErrorMessage
+                      ? "error-input"
+                      : "no-error-input"
+                  }
+                  ref={emailInputRef}
+                  onChange={emailChangeHandler}
+                />
+                {emailErrorMessage && (
+                  <p className="mt-2 text-red-500">{emailErrorMessage}</p>
                 )}
               </div>
+            )}
+            {!passwordRecovery && (
+              <Fragment>
+                <div className="relative">
+                  <div>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      placeholder={
+                        !resetPassword
+                          ? "Enter your password"
+                          : "Enter Password"
+                      }
+                      ref={passwordInputRef}
+                      onChange={passwordChangeHandler}
+                      className={
+                        passwordErrorMessage || incorrectCredentialsErrorMessage
+                          ? "error-input w-full"
+                          : "no-error-input w-full"
+                      }
+                    />
+
+                    <button
+                      type="button"
+                      className="password-btn"
+                      onClick={passwordStateHandler}
+                    >
+                      {showPassword ? (
+                        <FontAwesomeIcon icon={faEyeSlash} />
+                      ) : (
+                        <FontAwesomeIcon icon={faEye} />
+                      )}
+                    </button>
+                  </div>
+                  {!newAccount && !resetPassword && (
+                    <div className="flex justify-end">
+                      <Link
+                        to="/password-recovery"
+                        className="text-blue-800 underline mt-1"
+                      >
+                        Forgot password?
+                      </Link>
+                    </div>
+                  )}
+                  {passwordErrorMessage && (
+                    <p className="mt-2 text-red-500">{passwordErrorMessage}</p>
+                  )}
+                </div>
+
+                {/* Confirm Password */}
+                {resetPassword && (
+                  <div className="relative">
+                    <div>
+                      <input
+                        type={showConfirmPassword ? "text" : "password"}
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                        onChange={confirmPasswordChangeHandler}
+                        className={
+                          passwordErrorMessage
+                            ? "error-input w-full"
+                            : "no-error-input w-full"
+                        }
+                      />
+
+                      <button
+                        type="button"
+                        className="password-btn"
+                        onClick={confirmPasswordStateHandler}
+                      >
+                        {showConfirmPassword ? (
+                          <FontAwesomeIcon icon={faEyeSlash} />
+                        ) : (
+                          <FontAwesomeIcon icon={faEye} />
+                        )}
+                      </button>
+                    </div>
+                    {confirmPasswordErrorMessage && (
+                      <p className="mt-2 text-red-500">
+                        {confirmPasswordErrorMessage}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </Fragment>
             )}
           </div>
 
