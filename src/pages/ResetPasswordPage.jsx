@@ -1,4 +1,4 @@
-import AuthForm from "../util/AuthForm";
+import AuthForm from "../components/AuthForm";
 
 const ResetPasswordPage = () => {
   return (

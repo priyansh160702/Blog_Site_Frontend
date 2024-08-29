@@ -2,7 +2,7 @@ import { useLoaderData, useRouteLoaderData } from "react-router-dom";
 
 import dateFormatter from "../util/dateFormatter";
 import { Fragment } from "react";
-import Blog from "../util/Blog";
+import Blog from "../components/Blog";
 import BlogsByUserSection from "../components/BlogsByUserSection";
 import BlogsByCategorySection from "../components/BlogsByCategorySection";
 

@@ -9,7 +9,7 @@ import useAuthentication from "../util/hooks/use-authentication";
 import { modalActions } from "../redux/store";
 
 const Navbar = () => {
-  const { isAuthenticated, updateAuthState, logout } = useAuthentication();
+  const { isAuthenticated, updateAuthState } = useAuthentication();
 
   const location = useLocation();
 
@@ -19,10 +19,6 @@ const Navbar = () => {
     updateAuthState();
   }, [location]);
 
-  const logoutHandler = () => {
-    logout();
-  };
-
   const path = location.pathname;
 
   const showAuth =
@@ -30,6 +26,10 @@ const Navbar = () => {
 
   const writeBlogHandler = () => {
     dispatch(modalActions.showModal("blog"));
+  };
+
+  const userModalHandler = () => {
+    dispatch(modalActions.showModal("user"));
   };
 
   return (
@@ -60,7 +60,7 @@ const Navbar = () => {
               <FontAwesomeIcon icon={faPen} />
               <span>Write</span>
             </button>
-            <button>
+            <button onClick={userModalHandler}>
               <Avatar rounded className="hover:cursor-pointer" />
             </button>
             {/* <button onClick={logoutHandler}>Logout</button> */}
