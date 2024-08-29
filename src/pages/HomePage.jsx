@@ -1,8 +1,9 @@
 import { useRouteLoaderData } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import Blog from "../util/Blog";
+import Blog from "../components/Blog";
 import CreateBlogForm from "../components/CreateBlogForm";
+import UserModal from "../components/UserModal";
 
 const HomePage = () => {
   const blogsData = useRouteLoaderData("root");
@@ -10,6 +11,7 @@ const HomePage = () => {
   const noBlogs = blogsData.length === 0;
 
   const blogModalIsShown = useSelector((state) => state.modal.blogModalIsShown);
+  const userModalIsShown = useSelector((state) => state.modal.userModalIsShown);
 
   const blogs = blogsData.map((blog) => {
     return <Blog key={blog.id} blog={blog} />;
@@ -18,6 +20,7 @@ const HomePage = () => {
   return (
     <div className="container">
       {blogModalIsShown && <CreateBlogForm />}
+      {userModalIsShown && <UserModal />}
       {noBlogs ? (
         <p className="text-center text-red-500 font-bold text-2xl">
           No Blogs yet!

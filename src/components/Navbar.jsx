@@ -60,10 +60,10 @@ const Navbar = () => {
               <FontAwesomeIcon icon={faPen} />
               <span>Write</span>
             </button>
-            <button onClick={userModalHandler}>
-              <Avatar rounded className="hover:cursor-pointer" />
-            </button>
             {/* <button onClick={logoutHandler}>Logout</button> */}
+            <button onClick={userModalHandler}>
+              <Avatar img={null} rounded className="hover:cursor-pointer" />
+            </button>
           </div>
         )}
       </div>

@@ -17,6 +17,7 @@ const Backdrop = (props) => {
 
   const backdropClickHandler = () => {
     dispatch(modalActions.hideModal("blog"));
+    dispatch(modalActions.hideModal("user"));
   };
 
   return (
