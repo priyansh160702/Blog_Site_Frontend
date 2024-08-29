@@ -6,13 +6,13 @@ import { modalActions } from "../redux/store";
 
 const ModalOverlay = (props) => {
   return (
-    <div className="modal">
+    <div className={`modal ${props.className}`}>
       <div>{props.children}</div>
     </div>
   );
 };
 
-const Backdrop = () => {
+const Backdrop = (props) => {
   const dispatch = useDispatch();
 
   const backdropClickHandler = () => {
@@ -22,7 +22,7 @@ const Backdrop = () => {
   return (
     <div
       id="backdrop"
-      className="backdrop"
+      className={props.backdrop ? "bg-[rgba(0,0,0,0.75)]" : ""}
       onClick={backdropClickHandler}
     ></div>
   );
@@ -33,7 +33,7 @@ const port = document.getElementById("modal");
 const Modal = (props) => {
   return (
     <Fragment>
-      {props.backdrop && ReactDom.createPortal(<Backdrop />, port)}
+      {ReactDom.createPortal(<Backdrop backdrop={props.backdrop} />, port)}
       {ReactDom.createPortal(
         <ModalOverlay>{props.children}</ModalOverlay>,
         port
