@@ -7,7 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import BlogPage from "./pages/BlogPage";
 import signupAction from "./util/actions/SignupAction";
 import loginAction from "./util/actions/LoginAction";
-import getBlogsLoader from "./util/loaders/getBlogsLoader";
+import getData from "./util/loaders/getData";
 import getBlogByIdLoader from "./util/loaders/getBlogByIdLoader";
 import createBlogAction from "./util/actions/CreateBlogAction";
 import PasswordRecoveryPage from "./pages/PasswordRecoveryPage";
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    loader: getBlogsLoader,
+    loader: getData,
     id: "root",
     children: [
       {

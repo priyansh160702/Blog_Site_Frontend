@@ -1,6 +1,6 @@
 import { GET_BLOGS } from "../Graphql";
 
-const getBlogsLoader = async ({ request, params }) => {
+const getData = async ({ request, params }) => {
   const api_url = import.meta.env.VITE_API_URL;
 
   const response = await fetch(`${api_url}/graphql`, {
@@ -20,4 +20,4 @@ const getBlogsLoader = async ({ request, params }) => {
   return blogs;
 };
 
-export default getBlogsLoader;
+export default getData;
