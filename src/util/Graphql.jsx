@@ -21,6 +21,7 @@ export const GET_BLOGS = `
             title
             subTitle
             category
+            content
             image
             user{
                 id
@@ -78,6 +79,14 @@ export const GET_USER = `
             name
             profilePhoto
             email                 
+        }
+    }
+`;
+
+export const DELETE_BLOG_MUTATION = `
+    mutation DeleteBlog($blogId:Int!){
+        deleteBlog(blogId:$blogId){
+            message
         }
     }
 `;

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, noUser }) => {
   const api_url = import.meta.env.VITE_API_URL;
 
   return (
@@ -18,7 +18,7 @@ const Blog = ({ blog }) => {
         )}
         <h1>{blog.title}</h1>
         <h2>{blog.subTitle}</h2>
-        <h2>User = {blog.user.name}</h2>
+        {!noUser && <h2>User = {blog.user.name}</h2>}
       </Link>
     </li>
   );
