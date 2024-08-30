@@ -9,6 +9,8 @@ import useAuthentication from "../util/hooks/use-authentication";
 import { modalActions } from "../redux/store";
 
 const Navbar = () => {
+  const api_url = import.meta.env.VITE_API_URL;
+
   const { isAuthenticated, updateAuthState } = useAuthentication();
 
   const { user } = useRouteLoaderData("root");
@@ -65,7 +67,7 @@ const Navbar = () => {
             {/* <button onClick={logoutHandler}>Logout</button> */}
             <button onClick={userModalHandler}>
               <Avatar
-                img={user.profilePhoto}
+                img={`${api_url}/${user.profilePhoto}`}
                 rounded
                 className="hover:cursor-pointer"
               />

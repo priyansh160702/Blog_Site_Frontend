@@ -15,6 +15,7 @@ import passwordRecoveryAction from "./util/actions/PasswordRecoveryAction";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import resetPasswordAcion from "./util/actions/ResetPasswordAction";
 import UserProfilePage from "./pages/UserProfilePage";
+import profilePhotoAction from "./util/actions/ProfilePhotoAction";
 
 // Router
 const router = createBrowserRouter([
@@ -53,6 +54,7 @@ const router = createBrowserRouter([
       {
         path: "me",
         element: <UserProfilePage />,
+        action: profilePhotoAction,
       },
     ],
   },
