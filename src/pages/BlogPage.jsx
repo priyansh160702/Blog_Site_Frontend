@@ -16,11 +16,11 @@ const BlogPage = () => {
 
   const date = dateFormatter(createdAt);
 
-  const blogsByUser = data
+  const blogsByUser = data.blogs
     .filter((blog) => blog.user.id === user.id && blog.id !== id)
     .map((blog) => <Blog key={blog.id} blog={blog} />);
 
-  const blogsByCategory = data
+  const blogsByCategory = data.blogs
     .filter((blog) => blog.category === category && blog.id !== id)
     .map((blog) => <Blog key={blog.id} blog={blog} />);
 

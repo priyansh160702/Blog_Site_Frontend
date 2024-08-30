@@ -8,12 +8,12 @@ import UserModal from "../components/UserModal";
 const HomePage = () => {
   const blogsData = useRouteLoaderData("root");
 
-  const noBlogs = blogsData.length === 0;
+  const noBlogs = blogsData.blogs.length === 0;
 
   const blogModalIsShown = useSelector((state) => state.modal.blogModalIsShown);
   const userModalIsShown = useSelector((state) => state.modal.userModalIsShown);
 
-  const blogs = blogsData.map((blog) => {
+  const blogs = blogsData.blogs.map((blog) => {
     return <Blog key={blog.id} blog={blog} />;
   });
 

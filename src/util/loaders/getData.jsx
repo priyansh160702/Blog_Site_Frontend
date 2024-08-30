@@ -1,9 +1,11 @@
-import { GET_BLOGS } from "../Graphql";
+import { GET_BLOGS, GET_USER } from "../Graphql";
 
 const getData = async ({ request, params }) => {
   const api_url = import.meta.env.VITE_API_URL;
 
-  const response = await fetch(`${api_url}/graphql`, {
+  const authToken = localStorage.getItem("token");
+
+  const blogResponse = await fetch(`${api_url}/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,11 +15,30 @@ const getData = async ({ request, params }) => {
     }),
   });
 
-  const resData = await response.json();
+  const blogData = await blogResponse.json();
 
-  const blogs = resData.data.getBlogs;
+  const blogs = blogData.data.getBlogs;
 
-  return blogs;
+  let user;
+
+  if (!!authToken) {
+    const userResponse = await fetch(`${api_url}/graphql`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        query: GET_USER,
+      }),
+    });
+
+    const userData = await userResponse.json();
+
+    user = userData.data.getUser;
+  }
+
+  return { blogs, user };
 };
 
 export default getData;

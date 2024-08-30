@@ -70,3 +70,14 @@ export const RESET_PASSWORD_MUTATION = `
         }
     }
 `;
+
+export const GET_USER = `
+    query{
+        getUser {
+            id
+            name
+            profilePhoto
+            email                 
+        }
+    }
+`;
