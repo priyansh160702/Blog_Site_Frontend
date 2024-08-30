@@ -14,6 +14,7 @@ import PasswordRecoveryPage from "./pages/PasswordRecoveryPage";
 import passwordRecoveryAction from "./util/actions/PasswordRecoveryAction";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import resetPasswordAcion from "./util/actions/ResetPasswordAction";
+import UserProfilePage from "./pages/UserProfilePage";
 
 // Router
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
         path: "reset-password/:resetToken",
         element: <ResetPasswordPage />,
         action: resetPasswordAcion,
+      },
+      {
+        path: "me",
+        element: <UserProfilePage />,
       },
     ],
   },

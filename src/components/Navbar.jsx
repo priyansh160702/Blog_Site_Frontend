@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useRouteLoaderData } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
@@ -10,6 +10,8 @@ import { modalActions } from "../redux/store";
 
 const Navbar = () => {
   const { isAuthenticated, updateAuthState } = useAuthentication();
+
+  const { user } = useRouteLoaderData("root");
 
   const location = useLocation();
 
@@ -62,7 +64,11 @@ const Navbar = () => {
             </button>
             {/* <button onClick={logoutHandler}>Logout</button> */}
             <button onClick={userModalHandler}>
-              <Avatar img={null} rounded className="hover:cursor-pointer" />
+              <Avatar
+                img={user.profilePhoto}
+                rounded
+                className="hover:cursor-pointer"
+              />
             </button>
           </div>
         )}
