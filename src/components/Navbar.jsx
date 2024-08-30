@@ -67,7 +67,7 @@ const Navbar = () => {
             {/* <button onClick={logoutHandler}>Logout</button> */}
             <button onClick={userModalHandler}>
               <Avatar
-                img={`${api_url}/${user.profilePhoto}`}
+                img={`${api_url}/${user?.profilePhoto}`}
                 rounded
                 className="hover:cursor-pointer"
               />

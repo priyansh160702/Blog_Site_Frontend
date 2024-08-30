@@ -16,6 +16,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import resetPasswordAcion from "./util/actions/ResetPasswordAction";
 import UserProfilePage from "./pages/UserProfilePage";
 import profilePhotoAction from "./util/actions/ProfilePhotoAction";
+import MyBlogsPage from "./pages/MyBlogsPage";
 
 // Router
 const router = createBrowserRouter([
@@ -55,6 +56,13 @@ const router = createBrowserRouter([
         path: "me",
         element: <UserProfilePage />,
         action: profilePhotoAction,
+      },
+      {
+        path: "my-blogs",
+        element: <MyBlogsPage />,
+      },
+      {
+        path: "edit-blog/:blogId",
       },
     ],
   },

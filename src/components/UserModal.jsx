@@ -34,7 +34,9 @@ const UserModal = () => {
           <Link to="/me" onClick={closeModalHandler}>
             My Profile
           </Link>
-          <Link to="/my-blogs">My Blogs</Link>
+          <Link to="/my-blogs" onClick={closeModalHandler}>
+            My Blogs
+          </Link>
           <button className="w-full" onClick={logoutHandler}>
             Logout
           </button>
