@@ -1,11 +1,17 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { Fragment, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import useDocumentTitle from "../util/hooks/use-documentTitle";
 import Navbar from "./Navbar";
+import CreateBlogForm from "./CreateBlogForm";
+import UserModal from "./UserModal";
 
 const RootLayout = () => {
   const location = useLocation();
+
+  const blogModalIsShown = useSelector((state) => state.modal.blogModalIsShown);
+  const userModalIsShown = useSelector((state) => state.modal.userModalIsShown);
 
   // Scroll Restoration
   useEffect(() => {
@@ -30,6 +36,8 @@ const RootLayout = () => {
   return (
     <Fragment>
       <Navbar />
+      {blogModalIsShown && <CreateBlogForm />}
+      {userModalIsShown && <UserModal />}
       <Outlet />
     </Fragment>
   );
