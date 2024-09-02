@@ -17,7 +17,7 @@ import resetPasswordAcion from "./util/actions/ResetPasswordAction";
 import UserProfilePage from "./pages/UserProfilePage";
 import profilePhotoAction from "./util/actions/ProfilePhotoAction";
 import MyBlogsPage from "./pages/MyBlogsPage";
-import deleteBlogAction from "./util/actions/DeleteBlogAction";
+import blogAction from "./util/actions/blogAction";
 
 // Router
 const router = createBrowserRouter([
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
       {
         path: "my-blogs",
         element: <MyBlogsPage />,
-        action: deleteBlogAction,
+        action: blogAction,
       },
     ],
   },

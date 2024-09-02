@@ -83,6 +83,14 @@ export const GET_USER = `
     }
 `;
 
+export const EDIT_BLOG_MUTATION = `
+    mutation EditBlog($blogId:Int!,$editBlogData:EditBlogDataDto!){
+        editBlog(blogId:$blogId,editBlogData:$editBlogData){
+            id
+        }
+    }
+`;
+
 export const DELETE_BLOG_MUTATION = `
     mutation DeleteBlog($blogId:Int!){
         deleteBlog(blogId:$blogId){
