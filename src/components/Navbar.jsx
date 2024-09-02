@@ -54,7 +54,6 @@ const Navbar = () => {
             </div>
           </div>
         )}
-
         {isAuthenticated && (
           <div className="flex justify-center items-center space-x-5">
             <button
@@ -67,7 +66,7 @@ const Navbar = () => {
             {/* <button onClick={logoutHandler}>Logout</button> */}
             <button onClick={userModalHandler}>
               <Avatar
-                img={`${api_url}/${user?.profilePhoto}`}
+                img={user ? `${api_url}/${user?.profilePhoto}` : null}
                 rounded
                 className="hover:cursor-pointer"
               />

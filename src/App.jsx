@@ -25,12 +25,12 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     loader: getData,
+    action: createBlogAction,
     id: "root",
     children: [
       {
         index: true,
         element: <HomePage />,
-        action: createBlogAction,
       },
       {
         path: "/create-account",
