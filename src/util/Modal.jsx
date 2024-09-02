@@ -16,8 +16,7 @@ const Backdrop = (props) => {
   const dispatch = useDispatch();
 
   const backdropClickHandler = () => {
-    dispatch(modalActions.hideModal("blog"));
-    dispatch(modalActions.hideModal("user"));
+    dispatch(modalActions.hideModal(props.hideModal));
   };
 
   return (
@@ -34,7 +33,10 @@ const port = document.getElementById("modal");
 const Modal = (props) => {
   return (
     <Fragment>
-      {ReactDom.createPortal(<Backdrop backdrop={props.backdrop} />, port)}
+      {ReactDom.createPortal(
+        <Backdrop backdrop={props.backdrop} hideModal={props.hideModal} />,
+        port
+      )}
       {ReactDom.createPortal(
         <ModalOverlay className={props.className}>
           {props.children}

@@ -10,7 +10,9 @@ import UserModal from "./UserModal";
 const RootLayout = () => {
   const location = useLocation();
 
-  const blogModalIsShown = useSelector((state) => state.modal.blogModalIsShown);
+  const createBloglIsShown = useSelector(
+    (state) => state.modal.createBloglIsShown
+  );
   const userModalIsShown = useSelector((state) => state.modal.userModalIsShown);
 
   // Scroll Restoration
@@ -40,7 +42,7 @@ const RootLayout = () => {
   return (
     <Fragment>
       <Navbar />
-      {blogModalIsShown && <CreateBlogForm />}
+      {createBloglIsShown && <CreateBlogForm />}
       {userModalIsShown && <UserModal />}
       <Outlet />
     </Fragment>
