@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 const useAuthentication = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
     !!localStorage.getItem("token")
   );
+
+  const navigate = useNavigate();
 
   const updateAuthState = () => {
     setIsAuthenticated(!!localStorage.getItem("token"));
@@ -22,9 +25,13 @@ const useAuthentication = () => {
       if (remainingTime > 0) {
         setTimeout(() => {
           logout();
+          navigate("/");
+          window.alert("Your session timed out!");
         }, remainingTime);
       } else {
         logout();
+        navigate("/");
+        window.alert("Your session timed out!");
       }
     }
   }, [isAuthenticated]);
