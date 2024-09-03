@@ -30,11 +30,11 @@ const EditBlogForm = forwardRef(({ blogId, blogsData }, ref) => {
     }
   }, [formData]);
 
-  const formSubmitHandler = () => {
+  useEffect(() => {
     if (formData?.success) {
       dispatch(modalActions.hideModal("editBlog"));
     }
-  };
+  }, [formData?.success, dispatch]);
 
   const contentChangeHandler = () => {
     setContentError(null);
@@ -47,12 +47,7 @@ const EditBlogForm = forwardRef(({ blogId, blogsData }, ref) => {
       hideModal="editBlog"
     >
       <h1 className="text-center text-xl font-semibold mb-4">Edit Blog</h1>
-      <Form
-        onSubmit={formSubmitHandler}
-        method="post"
-        encType="multipart/form-data"
-        noValidate
-      >
+      <Form method="post" encType="multipart/form-data" noValidate>
         <div id="blog-form" className="flex flex-col space-y-4">
           <input
             type="text"
