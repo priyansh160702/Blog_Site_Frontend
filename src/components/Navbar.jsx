@@ -8,12 +8,12 @@ import { Avatar } from "flowbite-react";
 import useAuthentication from "../util/hooks/use-authentication";
 import { modalActions } from "../redux/store";
 
-const Navbar = () => {
+const Navbar = ({ isErrorPage }) => {
   const api_url = import.meta.env.VITE_API_URL;
 
   const { isAuthenticated, updateAuthState } = useAuthentication();
 
-  const { user } = useRouteLoaderData("root");
+  const user = useRouteLoaderData("root")?.user;
 
   const location = useLocation();
 
@@ -54,7 +54,7 @@ const Navbar = () => {
             </div>
           </div>
         )}
-        {isAuthenticated && (
+        {!isErrorPage && isAuthenticated && (
           <div className="flex justify-center items-center space-x-5">
             <button
               onClick={writeBlogHandler}

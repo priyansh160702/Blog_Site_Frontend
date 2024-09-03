@@ -18,12 +18,14 @@ import UserProfilePage from "./pages/UserProfilePage";
 import profilePhotoAction from "./util/actions/ProfilePhotoAction";
 import MyBlogsPage from "./pages/MyBlogsPage";
 import blogAction from "./util/actions/blogAction";
+import ErrorPage from "./pages/ErrorPage";
 
 // Router
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     loader: getData,
     action: createBlogAction,
     id: "root",
