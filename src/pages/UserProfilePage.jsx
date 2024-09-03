@@ -37,7 +37,11 @@ const UserProfilePage = () => {
     <main className="container">
       <div className=" flex flex-col items-center space-y-10">
         <div className="flex flex-col space-y-7">
-          <Avatar img={`${api_url}/${user.profilePhoto}`} rounded size="lg" />
+          <Avatar
+            img={user.profilePhoto ? `${api_url}/${user.profilePhoto}` : null}
+            rounded
+            size="lg"
+          />
           <Form method="post" encType="multipart/form-data" ref={formRef}>
             <div className="flex flex-col items-center justify-center ">
               <div>

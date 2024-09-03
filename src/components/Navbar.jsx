@@ -66,7 +66,9 @@ const Navbar = ({ isErrorPage }) => {
             {/* <button onClick={logoutHandler}>Logout</button> */}
             <button onClick={userModalHandler}>
               <Avatar
-                img={user ? `${api_url}/${user?.profilePhoto}` : null}
+                img={
+                  user.profilePhoto ? `${api_url}/${user.profilePhoto}` : null
+                }
                 rounded
                 className="hover:cursor-pointer"
               />
