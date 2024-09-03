@@ -25,6 +25,10 @@ const MyBlogsPage = () => {
     }
   }, [editBlogIsShown]);
 
+  if (!user) {
+    return;
+  }
+
   const userId = user.id;
 
   const editBlogHandler = (blogId) => {

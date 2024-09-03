@@ -1,17 +1,29 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useRouteError } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
+import extractDataFromStream from "../util/exractDataFromStream";
 
 const ErrorPage = () => {
   const error = useRouteError();
-
+  const [message, setMessage] = useState("");
   const status = error.status || 500;
-  let message = error.message || "Internal Server Error";
 
-  if (status === 404) {
-    message = "Page not found";
-  }
+  console.log(error);
+
+  useEffect(() => {
+    // Extract error message from the stream if available
+    const fetchErrorMessage = async () => {
+      if (error.body) {
+        const extractedMessage = await extractDataFromStream(error.body);
+        setMessage(extractedMessage.message);
+      } else {
+        setMessage("An unknown error occurred.");
+      }
+    };
+
+    fetchErrorMessage();
+  }, [error]);
 
   return (
     <Fragment>

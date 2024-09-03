@@ -19,6 +19,7 @@ import profilePhotoAction from "./util/actions/ProfilePhotoAction";
 import MyBlogsPage from "./pages/MyBlogsPage";
 import blogAction from "./util/actions/blogAction";
 import ErrorPage from "./pages/ErrorPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Router
 const router = createBrowserRouter([
@@ -57,12 +58,20 @@ const router = createBrowserRouter([
       },
       {
         path: "me",
-        element: <UserProfilePage />,
+        element: (
+          <ProtectedRoute>
+            <UserProfilePage />
+          </ProtectedRoute>
+        ),
         action: profilePhotoAction,
       },
       {
         path: "my-blogs",
-        element: <MyBlogsPage />,
+        element: (
+          <ProtectedRoute>
+            <MyBlogsPage />
+          </ProtectedRoute>
+        ),
         action: blogAction,
       },
     ],

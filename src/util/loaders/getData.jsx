@@ -21,7 +21,7 @@ const getData = async ({ request, params }) => {
 
   let user;
 
-  if (!!authToken) {
+  if (authToken) {
     const userResponse = await fetch(`${api_url}/graphql`, {
       method: "POST",
       headers: {

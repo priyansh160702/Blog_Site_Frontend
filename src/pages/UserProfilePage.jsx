@@ -11,6 +11,8 @@ const UserProfilePage = () => {
 
   const { user } = useRouteLoaderData("root");
 
+  console.log(user);
+
   const errors = useActionData();
 
   useEffect(() => {
@@ -26,6 +28,10 @@ const UserProfilePage = () => {
       formRef.current.reset();
     }
   }, [errors]);
+
+  if (!user) {
+    return;
+  }
 
   return (
     <main className="container">
