@@ -1,9 +1,6 @@
 import { useRouteLoaderData } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import Blog from "../components/Blog";
-import CreateBlogForm from "../components/CreateBlogForm";
-import UserModal from "../components/UserModal";
 
 const HomePage = () => {
   const blogsData = useRouteLoaderData("root");
@@ -15,13 +12,13 @@ const HomePage = () => {
   });
 
   return (
-    <div className="container">
+    <div className="container pb-5">
       {noBlogs ? (
         <p className="text-center text-red-500 font-bold text-2xl">
           No Blogs yet!
         </p>
       ) : (
-        <ul className="grid grid-cols-3">{blogs}</ul>
+        <ul className="grid grid-cols-3 place-items-center gap-8">{blogs}</ul>
       )}
     </div>
   );

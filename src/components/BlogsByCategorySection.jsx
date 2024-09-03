@@ -1,8 +1,8 @@
 const BlogsByCategorySection = ({ category, blogsByCategory }) => {
   return (
-    <section>
+    <section className="mt-10">
       <div className="container text-center">
-        <h1 className="font-bold text-2xl">More from "{category}"</h1>
+        <h1 className="font-bold text-2xl mb-7">More in "{category}"</h1>
         <ul className="grid grid-cols-3">{blogsByCategory}</ul>
       </div>
     </section>

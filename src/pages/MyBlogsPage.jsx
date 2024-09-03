@@ -49,6 +49,14 @@ const MyBlogsPage = () => {
     }
   };
 
+  if (blogsData.length === 0) {
+    return (
+      <p className="text-center font-semibold text-red-500 text-xl">
+        No blogs yet!
+      </p>
+    );
+  }
+
   const blogs = blogsData
     .filter((blog) => blog.user.id === userId)
     .map((blog) => {

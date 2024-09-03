@@ -28,13 +28,19 @@ const BlogPage = () => {
     <Fragment>
       <main>
         <div className="container text-center">
-          <img src={`${api_url}/${image}`} alt="" />
-          <h2 className="">{category}</h2>
-          <h1 className="title">{title}</h1>
-          <h2>{subTitle}</h2>
-          <h2>~By {user.name}</h2>
-          <h2>{date}</h2>
-          <p className="text-left mt-5">{content}</p>
+          <img
+            className="w-full h-[30rem] mx-auto"
+            src={`${api_url}/${image}`}
+            alt=""
+          />
+          <div className="mt-5">
+            {/* <h2 className="">{category}</h2> */}
+            <h1 className="title">{title}</h1>
+            <h2>{subTitle}</h2>
+            <h2>~By {user.name}</h2>
+            <h2>{date}</h2>
+            <p className="text-left mt-5">{content}</p>
+          </div>
         </div>
       </main>
       {blogsByUser.length > 0 && (

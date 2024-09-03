@@ -26,6 +26,7 @@ export const GET_BLOGS = `
             user{
                 id
                 name
+                profilePhoto
             }             
         }
     }
