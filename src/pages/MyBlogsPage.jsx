@@ -2,7 +2,7 @@ import { Fragment, lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Await, useRouteLoaderData, useSubmit } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-const Blog = lazy(() => import("../components/Blog"));
+import Blog from "../components/Blog";
 const EditBlogForm = lazy(() => import("../components/EditBlogForm"));
 import { modalActions } from "../redux/store";
 
@@ -66,25 +66,23 @@ const MyBlogsPage = () => {
               .filter((blog) => blog.user.id === userId)
               .map((blog) => {
                 return (
-                  <Suspense fallback={<p>Loading...</p>}>
-                    <div key={blog.id} className="flex flex-col mx-auto">
-                      <Blog blog={blog} noUser={true} />
-                      <div className="mx-auto space-x-3 mt-1">
-                        <button
-                          className="btn-white"
-                          onClick={() => editBlogHandler(blog.id)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="btn-white"
-                          onClick={() => deletBlogHandler(blog.id)}
-                        >
-                          Delete
-                        </button>
-                      </div>
+                  <div key={blog.id} className="flex flex-col mx-auto">
+                    <Blog blog={blog} noUser={true} />
+                    <div className="mx-auto space-x-3 mt-1">
+                      <button
+                        className="btn-white"
+                        onClick={() => editBlogHandler(blog.id)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn-white"
+                        onClick={() => deletBlogHandler(blog.id)}
+                      >
+                        Delete
+                      </button>
                     </div>
-                  </Suspense>
+                  </div>
                 );
               });
 

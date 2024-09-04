@@ -1,8 +1,7 @@
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 import { useRouteLoaderData, Await } from "react-router-dom";
 
-// import Blog from "../components/Blog";
-const Blog = lazy(() => import("../components/Blog"));
+import Blog from "../components/Blog";
 
 const HomePage = () => {
   const { blogs } = useRouteLoaderData("root");
@@ -29,9 +28,7 @@ const HomePage = () => {
             return (
               <ul className="grid grid-cols-3 place-items-center gap-8">
                 {resolvedBlogs.map((blog) => (
-                  <Suspense fallback={<p>Loading...</p>}>
-                    <Blog key={blog.id} blog={blog} />
-                  </Suspense>
+                  <Blog key={blog.id} blog={blog} />
                 ))}
               </ul>
             );
