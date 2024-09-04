@@ -25,7 +25,7 @@ const HomePage = () => {
               );
             }
             return (
-              <ul className="grid grid-cols-3 place-items-center gap-8">
+              <ul className="grid md:grid-cols-3 place-items-center gap-8">
                 {resolvedBlogs.map((blog) => (
                   <Blog key={blog.id} blog={blog} />
                 ))}

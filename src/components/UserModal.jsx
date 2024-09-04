@@ -25,7 +25,7 @@ const UserModal = () => {
 
   return (
     <Modal
-      className="shadow-2xl rounded-md top-[4rem] right-[2rem] w-[13rem]"
+      className="shadow-2xl rounded-md top-[4rem] right-[0.5rem] md:right-[2rem] w-[13rem]"
       hideModal="user"
     >
       <div className="flex flex-col justify-between items-center">

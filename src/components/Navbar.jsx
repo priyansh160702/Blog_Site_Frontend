@@ -38,7 +38,7 @@ const Navbar = ({ isErrorPage }) => {
 
   return (
     <nav className="navbar">
-      <div className="container flex justify-between items-center">
+      <div className="container px-2 flex justify-between items-center md:px-0  ">
         <Link to="/">
           <h1 className="font-semibold text-2xl">Nest-Level Blogs</h1>
         </Link>

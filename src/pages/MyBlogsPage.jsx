@@ -99,7 +99,10 @@ const MyBlogsPage = () => {
                     />
                   </Suspense>
                 )}
-                <ul className="grid grid-cols-2 gap-3 mb-5">{blogs}</ul>;
+                <ul className="grid md:grid-cols-2 place-items-center gap-3 mb-5">
+                  {blogs}
+                </ul>
+                ;
               </Fragment>
             );
           }}

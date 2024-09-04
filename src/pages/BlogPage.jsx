@@ -37,7 +37,7 @@ const BlogPage = () => {
             <h2>{subTitle}</h2>
             <h2>~By {user.name}</h2>
             <h2>{date}</h2>
-            <p className="text-left mt-5">{content}</p>
+            <p className="text-justify px-4 mt-5 md:px-0">{content}</p>
           </div>
         </div>
       </main>

@@ -98,7 +98,7 @@ const AuthForm = ({
 
   return (
     <div className="container">
-      <div className="mx-auto w-[35rem] shadow-xl px-11 py-5">
+      <div className="mx-auto md:w-[35rem] shadow-xl px-11 py-5">
         <h1 className="title">{title}</h1>
         {!passwordRecovery && !resetPassword && (
           <h2>
@@ -111,7 +111,7 @@ const AuthForm = ({
         <Form method="post" noValidate>
           <div className="form-content">
             {newAccount && (
-              <div className="flex justify-between">
+              <div className="flex justify-between gap-2 md:gap-0">
                 <div>
                   <input
                     type="text"

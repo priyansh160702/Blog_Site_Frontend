@@ -22,6 +22,8 @@ const Blog = ({ blog, noUser }) => {
               className="w-[2rem] h-[2rem] rounded-full"
               src={`${api_url}/${blog.user?.profilePhoto}`}
               alt=""
+              onLoad={imageLoadingHandler}
+              style={{ display: imageIsLoading ? "none" : "block" }}
             />
             <h2 className="text-lg">{blog.user.name}</h2>
           </div>

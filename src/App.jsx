@@ -12,7 +12,6 @@ const UserProfilePage = lazy(() => import("./pages/UserProfilePage"));
 const MyBlogsPage = lazy(() => import("./pages/MyBlogsPage"));
 import ErrorPage from "./pages/ErrorPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-
 import LoadingSpinner from "./components/LoadingSpinner";
 
 import signupAction from "./util/actions/SignupAction";
