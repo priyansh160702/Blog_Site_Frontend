@@ -9,7 +9,11 @@ const ModalOverlay = ({ children, className }) => {
   return (
     <motion.div
       variants={{
-        visible: { opacity: 1, y: 60, transition: { type: "spring" } },
+        visible: {
+          opacity: 1,
+          y: 60,
+          transition: { type: "spring", duration: "1" },
+        },
         hidden: { opacity: 0, y: -1, transition: { type: "tween" } },
       }}
       initial="hidden"
@@ -30,11 +34,22 @@ const Backdrop = (props) => {
   };
 
   return (
-    <div
+    <motion.div
       id="backdrop"
       className={props.backdrop ? "bg-[rgba(0,0,0,0.75)]" : ""}
+      variants={{
+        visible: {
+          opacity: 1,
+
+          transition: { type: "spring", duration: "1" },
+        },
+        hidden: { opacity: 0, transition: { type: "tween" } },
+      }}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
       onClick={backdropClickHandler}
-    ></div>
+    ></motion.div>
   );
 };
 
