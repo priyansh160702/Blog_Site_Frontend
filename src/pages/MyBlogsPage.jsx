@@ -1,10 +1,10 @@
-import { Fragment, Suspense, useEffect, useRef, useState } from "react";
+import { Fragment, lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Await, useRouteLoaderData, useSubmit } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import Blog from "../components/Blog";
+const Blog = lazy(() => import("../components/Blog"));
+const EditBlogForm = lazy(() => import("../components/EditBlogForm"));
 import { modalActions } from "../redux/store";
-import EditBlogForm from "../components/EditBlogForm";
 
 const MyBlogsPage = () => {
   const { blogs: blogsData, user } = useRouteLoaderData("root");
@@ -66,34 +66,38 @@ const MyBlogsPage = () => {
               .filter((blog) => blog.user.id === userId)
               .map((blog) => {
                 return (
-                  <div key={blog.id} className="flex flex-col mx-auto">
-                    <Blog blog={blog} noUser={true} />
-                    <div className="mx-auto space-x-3 mt-1">
-                      <button
-                        className="btn-white"
-                        onClick={() => editBlogHandler(blog.id)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="btn-white"
-                        onClick={() => deletBlogHandler(blog.id)}
-                      >
-                        Delete
-                      </button>
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <div key={blog.id} className="flex flex-col mx-auto">
+                      <Blog blog={blog} noUser={true} />
+                      <div className="mx-auto space-x-3 mt-1">
+                        <button
+                          className="btn-white"
+                          onClick={() => editBlogHandler(blog.id)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn-white"
+                          onClick={() => deletBlogHandler(blog.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  </Suspense>
                 );
               });
 
             return (
               <Fragment>
                 {editBlogIsShown && (
-                  <EditBlogForm
-                    ref={titleInputRef}
-                    blogsData={resolvedBlogs}
-                    blogId={blogId}
-                  />
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <EditBlogForm
+                      ref={titleInputRef}
+                      blogsData={resolvedBlogs}
+                      blogId={blogId}
+                    />
+                  </Suspense>
                 )}
                 <ul className="grid grid-cols-2 gap-3 mb-5">{blogs}</ul>;
               </Fragment>

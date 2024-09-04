@@ -1,10 +1,15 @@
+import { Fragment, Suspense, lazy } from "react";
 import { Await, useLoaderData, useRouteLoaderData } from "react-router-dom";
 
 import dateFormatter from "../util/dateFormatter";
-import { Fragment, Suspense } from "react";
-import Blog from "../components/Blog";
-import BlogsByUserSection from "../components/BlogsByUserSection";
-import BlogsByCategorySection from "../components/BlogsByCategorySection";
+
+const Blog = lazy(() => import("../components/Blog"));
+const BlogsByUserSection = lazy(() =>
+  import("../components/BlogsByUserSection")
+);
+const BlogsByCategorySection = lazy(() =>
+  import("../components/BlogsByCategorySection")
+);
 
 const BlogPage = () => {
   const api_url = import.meta.env.VITE_API_URL;
@@ -38,29 +43,39 @@ const BlogPage = () => {
       <Suspense fallback={<p>Loading...</p>}>
         <Await resolve={blogs}>
           {(resolvedBlogs) => {
-            console.log(resolvedBlogs);
-
             const blogsByUser = resolvedBlogs
               .filter((blog) => blog.user.id === user.id && blog.id !== id)
-              .map((blog) => <Blog key={blog.id} blog={blog} />);
+              .map((blog) => (
+                <Suspense key={blog.id} fallback={<p>Loading...</p>}>
+                  <Blog blog={blog} />
+                </Suspense>
+              ));
 
             const blogsByCategory = resolvedBlogs
               .filter((blog) => blog.category === category && blog.id !== id)
-              .map((blog) => <Blog key={blog.id} blog={blog} />);
+              .map((blog) => (
+                <Suspense key={blog.id} fallback={<p>Loading...</p>}>
+                  <Blog blog={blog} />
+                </Suspense>
+              ));
 
             return (
               <Fragment>
                 {blogsByUser.length > 0 && (
-                  <BlogsByUserSection
-                    userName={user.name}
-                    blogsByUser={blogsByUser}
-                  />
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <BlogsByUserSection
+                      userName={user.name}
+                      blogsByUser={blogsByUser}
+                    />
+                  </Suspense>
                 )}
                 {blogsByCategory.length > 0 && (
-                  <BlogsByCategorySection
-                    category={category}
-                    blogsByCategory={blogsByCategory}
-                  />
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <BlogsByCategorySection
+                      category={category}
+                      blogsByCategory={blogsByCategory}
+                    />
+                  </Suspense>
                 )}
               </Fragment>
             );
