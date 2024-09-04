@@ -2,6 +2,8 @@ import { Fragment, lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Await, useRouteLoaderData, useSubmit } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
+import LoadingSpinner from "../components/LoadingSpinner";
+
 import Blog from "../components/Blog";
 const EditBlogForm = lazy(() => import("../components/EditBlogForm"));
 import { modalActions } from "../redux/store";
@@ -51,7 +53,7 @@ const MyBlogsPage = () => {
 
   return (
     <Fragment>
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<LoadingSpinner />}>
         <Await resolve={blogsData}>
           {(resolvedBlogs) => {
             if (resolvedBlogs.length === 0) {
@@ -89,7 +91,7 @@ const MyBlogsPage = () => {
             return (
               <Fragment>
                 {editBlogIsShown && (
-                  <Suspense fallback={<p>Loading...</p>}>
+                  <Suspense fallback={<LoadingSpinner />}>
                     <EditBlogForm
                       ref={titleInputRef}
                       blogsData={resolvedBlogs}

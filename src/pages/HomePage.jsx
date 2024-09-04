@@ -2,15 +2,14 @@ import { Suspense } from "react";
 import { useRouteLoaderData, Await } from "react-router-dom";
 
 import Blog from "../components/Blog";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const HomePage = () => {
   const { blogs } = useRouteLoaderData("root");
 
   return (
     <div className="container pb-5">
-      <Suspense
-        fallback={<p className="text-center text-red-500">Loading Blogs...</p>}
-      >
+      <Suspense fallback={<LoadingSpinner />}>
         <Await
           resolve={blogs}
           errorElement={

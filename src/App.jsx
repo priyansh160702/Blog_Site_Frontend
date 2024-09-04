@@ -13,6 +13,8 @@ const MyBlogsPage = lazy(() => import("./pages/MyBlogsPage"));
 import ErrorPage from "./pages/ErrorPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+import LoadingSpinner from "./components/LoadingSpinner";
+
 import signupAction from "./util/actions/SignupAction";
 import loginAction from "./util/actions/LoginAction";
 import createBlogAction from "./util/actions/CreateBlogAction";
@@ -38,7 +40,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<LoadingSpinner />}>
             <HomePage />
           </Suspense>
         ),
@@ -46,7 +48,7 @@ const router = createBrowserRouter([
       {
         path: "/create-account",
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<LoadingSpinner />}>
             <SignupPage />
           </Suspense>
         ),
@@ -55,7 +57,7 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<LoadingSpinner />}>
             <LoginPage />
           </Suspense>
         ),
@@ -64,7 +66,7 @@ const router = createBrowserRouter([
       {
         path: "blog/:blogId",
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<LoadingSpinner />}>
             <BlogPage />
           </Suspense>
         ),
@@ -78,7 +80,7 @@ const router = createBrowserRouter([
       {
         path: "password-recovery",
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<LoadingSpinner />}>
             <PasswordRecoveryPage />
           </Suspense>
         ),
@@ -87,7 +89,7 @@ const router = createBrowserRouter([
       {
         path: "reset-password/:resetToken",
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<LoadingSpinner />}>
             <ResetPasswordPage />
           </Suspense>
         ),
@@ -97,7 +99,7 @@ const router = createBrowserRouter([
         path: "me",
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<p>Loading...</p>}>
+            <Suspense fallback={<LoadingSpinner />}>
               <UserProfilePage />
             </Suspense>
           </ProtectedRoute>
@@ -108,7 +110,7 @@ const router = createBrowserRouter([
         path: "my-blogs",
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<p>Loading...</p>}>
+            <Suspense fallback={<LoadingSpinner />}>
               <MyBlogsPage />
             </Suspense>
           </ProtectedRoute>

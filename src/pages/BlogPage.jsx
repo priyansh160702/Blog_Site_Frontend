@@ -2,6 +2,7 @@ import { Fragment, Suspense, lazy } from "react";
 import { Await, useLoaderData, useRouteLoaderData } from "react-router-dom";
 
 import dateFormatter from "../util/dateFormatter";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Blog = lazy(() => import("../components/Blog"));
 const BlogsByUserSection = lazy(() =>
@@ -40,13 +41,13 @@ const BlogPage = () => {
           </div>
         </div>
       </main>
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<LoadingSpinner />}>
         <Await resolve={blogs}>
           {(resolvedBlogs) => {
             const blogsByUser = resolvedBlogs
               .filter((blog) => blog.user.id === user.id && blog.id !== id)
               .map((blog) => (
-                <Suspense key={blog.id} fallback={<p>Loading...</p>}>
+                <Suspense key={blog.id} fallback={<LoadingSpinner />}>
                   <Blog blog={blog} />
                 </Suspense>
               ));
@@ -54,7 +55,7 @@ const BlogPage = () => {
             const blogsByCategory = resolvedBlogs
               .filter((blog) => blog.category === category && blog.id !== id)
               .map((blog) => (
-                <Suspense key={blog.id} fallback={<p>Loading...</p>}>
+                <Suspense key={blog.id} fallback={<LoadingSpinner />}>
                   <Blog blog={blog} />
                 </Suspense>
               ));
@@ -62,7 +63,7 @@ const BlogPage = () => {
             return (
               <Fragment>
                 {blogsByUser.length > 0 && (
-                  <Suspense fallback={<p>Loading...</p>}>
+                  <Suspense fallback={<LoadingSpinner />}>
                     <BlogsByUserSection
                       userName={user.name}
                       blogsByUser={blogsByUser}
@@ -70,7 +71,7 @@ const BlogPage = () => {
                   </Suspense>
                 )}
                 {blogsByCategory.length > 0 && (
-                  <Suspense fallback={<p>Loading...</p>}>
+                  <Suspense fallback={<LoadingSpinner />}>
                     <BlogsByCategorySection
                       category={category}
                       blogsByCategory={blogsByCategory}
