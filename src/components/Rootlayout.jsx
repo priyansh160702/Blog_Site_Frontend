@@ -44,7 +44,9 @@ const RootLayout = () => {
       <Navbar />
       {createBloglIsShown && <CreateBlogForm />}
       {userModalIsShown && <UserModal />}
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </Fragment>
   );
 };

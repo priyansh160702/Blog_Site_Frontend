@@ -1,5 +1,5 @@
-import { Fragment, useEffect, useRef, useState } from "react";
-import { useRouteLoaderData, useSubmit } from "react-router-dom";
+import { Fragment, Suspense, useEffect, useRef, useState } from "react";
+import { Await, useRouteLoaderData, useSubmit } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import Blog from "../components/Blog";
@@ -49,48 +49,58 @@ const MyBlogsPage = () => {
     }
   };
 
-  if (blogsData.length === 0) {
-    return (
-      <p className="text-center font-semibold text-red-500 text-xl">
-        No blogs yet!
-      </p>
-    );
-  }
-
-  const blogs = blogsData
-    .filter((blog) => blog.user.id === userId)
-    .map((blog) => {
-      return (
-        <div key={blog.id} className="flex flex-col">
-          <Blog blog={blog} noUser={true} />
-          <div className="mx-auto space-x-3">
-            <button
-              className="btn-white"
-              onClick={() => editBlogHandler(blog.id)}
-            >
-              Edit
-            </button>
-            <button
-              className="btn-white"
-              onClick={() => deletBlogHandler(blog.id)}
-            >
-              Delete
-            </button>
-          </div>
-        </div>
-      );
-    });
-
   return (
     <Fragment>
-      {editBlogIsShown && (
-        <EditBlogForm
-          ref={titleInputRef}
-          blogsData={blogsData}
-          blogId={blogId}
-        />
-      )}
-      <ul className="grid grid-cols-2">{blogs}</ul>
+      <Suspense fallback={<p>Loading...</p>}>
+        <Await resolve={blogsData}>
+          {(resolvedBlogs) => {
+            if (resolvedBlogs.length === 0) {
+              return (
+                <p className="text-center font-semibold text-red-500 text-xl">
+                  No blogs yet!
+                </p>
+              );
+            }
+
+            const blogs = resolvedBlogs
+              .filter((blog) => blog.user.id === userId)
+              .map((blog) => {
+                return (
+                  <div key={blog.id} className="flex flex-col mx-auto">
+                    <Blog blog={blog} noUser={true} />
+                    <div className="mx-auto space-x-3 mt-1">
+                      <button
+                        className="btn-white"
+                        onClick={() => editBlogHandler(blog.id)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn-white"
+                        onClick={() => deletBlogHandler(blog.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                );
+              });
+
+            return (
+              <Fragment>
+                {editBlogIsShown && (
+                  <EditBlogForm
+                    ref={titleInputRef}
+                    blogsData={resolvedBlogs}
+                    blogId={blogId}
+                  />
+                )}
+                <ul className="grid grid-cols-2 gap-3 mb-5">{blogs}</ul>;
+              </Fragment>
+            );
+          }}
+        </Await>
+      </Suspense>
     </Fragment>
   );
 };

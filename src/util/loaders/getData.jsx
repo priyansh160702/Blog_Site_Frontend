@@ -1,3 +1,5 @@
+import { defer } from "react-router-dom";
+
 import { GET_BLOGS, GET_USER } from "../Graphql";
 
 const getData = async ({ request, params }) => {
@@ -5,7 +7,7 @@ const getData = async ({ request, params }) => {
 
   const authToken = localStorage.getItem("token");
 
-  const blogResponse = await fetch(`${api_url}/graphql`, {
+  const blogsPromise = fetch(`${api_url}/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,13 +15,11 @@ const getData = async ({ request, params }) => {
     body: JSON.stringify({
       query: GET_BLOGS,
     }),
-  });
+  })
+    .then((response) => response.json())
+    .then((data) => data.data.getBlogs);
 
-  const blogData = await blogResponse.json();
-
-  const blogs = blogData.data.getBlogs;
-
-  let user;
+  let user = null;
 
   if (authToken) {
     const userResponse = await fetch(`${api_url}/graphql`, {
@@ -38,7 +38,7 @@ const getData = async ({ request, params }) => {
     user = userData.data.getUser;
   }
 
-  return { blogs, user };
+  return defer({ blogs: blogsPromise, user });
 };
 
 export default getData;
