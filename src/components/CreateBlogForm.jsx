@@ -66,7 +66,7 @@ const CreateBlogForm = () => {
   return (
     <Modal
       backdrop={true}
-      className="top-[10%] left-[10%] md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
+      className=" left-[10%] md:left-[40%] md:-translate-x-1/2 "
       hideModal="createBlog"
     >
       <h1 className="text-center text-2xl md:text-xl font-semibold mb-4">

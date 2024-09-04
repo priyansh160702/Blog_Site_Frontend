@@ -1,14 +1,24 @@
 import { Fragment } from "react";
 import ReactDom from "react-dom";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 import { modalActions } from "../redux/store";
 
-const ModalOverlay = (props) => {
+const ModalOverlay = ({ children, className }) => {
   return (
-    <div className={`modal ${props.className}`}>
-      <div>{props.children}</div>
-    </div>
+    <motion.div
+      variants={{
+        visible: { opacity: 1, y: 60, transition: { type: "spring" } },
+        hidden: { opacity: 0, y: -1, transition: { type: "tween" } },
+      }}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      className={`modal ${className}`}
+    >
+      <div>{children}</div>
+    </motion.div>
   );
 };
 

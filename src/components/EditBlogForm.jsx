@@ -43,7 +43,7 @@ const EditBlogForm = forwardRef(({ blogId, blogsData }, ref) => {
   return (
     <Modal
       backdrop={true}
-      className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      className="left-[10%] md:left-[40%] md:-translate-x-1/2 "
       hideModal="editBlog"
     >
       <h1 className="text-center text-xl font-semibold mb-4">Edit Blog</h1>

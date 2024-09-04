@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { Fragment, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { AnimatePresence } from "framer-motion";
 
 import useDocumentTitle from "../util/hooks/use-documentTitle";
 import Navbar from "./Navbar";
@@ -42,8 +43,10 @@ const RootLayout = () => {
   return (
     <Fragment>
       <Navbar />
-      {createBloglIsShown && <CreateBlogForm />}
-      {userModalIsShown && <UserModal />}
+      <AnimatePresence>
+        {createBloglIsShown && <CreateBlogForm />}
+        {userModalIsShown && <UserModal />}
+      </AnimatePresence>
       <main>
         <Outlet />
       </main>

@@ -1,9 +1,9 @@
 import { Fragment, lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Await, useRouteLoaderData, useSubmit } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { AnimatePresence } from "framer-motion";
 
 import LoadingSpinner from "../components/LoadingSpinner";
-
 import Blog from "../components/Blog";
 const EditBlogForm = lazy(() => import("../components/EditBlogForm"));
 import { modalActions } from "../redux/store";
@@ -22,7 +22,7 @@ const MyBlogsPage = () => {
   const titleInputRef = useRef();
 
   useEffect(() => {
-    if (editBlogIsShown) {
+    if (titleInputRef.current) {
       titleInputRef.current.focus();
     }
   }, [editBlogIsShown]);
@@ -90,15 +90,17 @@ const MyBlogsPage = () => {
 
             return (
               <Fragment>
-                {editBlogIsShown && (
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <EditBlogForm
-                      ref={titleInputRef}
-                      blogsData={resolvedBlogs}
-                      blogId={blogId}
-                    />
-                  </Suspense>
-                )}
+                <AnimatePresence>
+                  {editBlogIsShown && (
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <EditBlogForm
+                        ref={titleInputRef}
+                        blogsData={resolvedBlogs}
+                        blogId={blogId}
+                      />
+                    </Suspense>
+                  )}
+                </AnimatePresence>
                 <ul className="grid md:grid-cols-2 place-items-center gap-3 mb-5">
                   {blogs}
                 </ul>
