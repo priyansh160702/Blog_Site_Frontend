@@ -88,3 +88,8 @@ body{
 .modal textarea{
   @apply w-full pt-1 pb-20
 }
+
+/* Blog */
+.blog-category{
+  @apply text-left rounded-md py-[1px] px-[5px] text-white w-fit
+}

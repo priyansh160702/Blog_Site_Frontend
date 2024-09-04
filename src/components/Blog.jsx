@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import getCategoryClass from "../util/getCategoryClass";
+
 const Blog = ({ blog, noUser }) => {
   const api_url = import.meta.env.VITE_API_URL;
 
@@ -13,7 +15,7 @@ const Blog = ({ blog, noUser }) => {
   return (
     <Link to={`/blog/${blog.id}`}>
       <div className="text-center shadow-xl w-fit h-fit p-3 rounded-md hover:shadow-2xl">
-        <h2 className="text-left bg-orange-500 rounded-md py-[1px] px-[5px] text-white w-fit">
+        <h2 className={`blog-category ${getCategoryClass(blog.category)}`}>
           {blog.category}
         </h2>
         {!noUser && (
