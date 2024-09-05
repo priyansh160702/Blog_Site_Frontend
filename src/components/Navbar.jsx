@@ -7,6 +7,7 @@ import { Avatar } from "flowbite-react";
 
 import useAuthentication from "../util/hooks/use-authentication";
 import { modalActions } from "../redux/store";
+import logo from "../assets/splash-img.png";
 
 const Navbar = ({ isErrorPage }) => {
   const api_url = import.meta.env.VITE_API_URL;
@@ -40,7 +41,9 @@ const Navbar = ({ isErrorPage }) => {
     <nav className="navbar">
       <div className="container px-2 flex justify-between items-center md:px-0  ">
         <Link to="/">
-          <h1 className="font-semibold text-2xl">Nest-Level Blogs</h1>
+          <div className="w-[6rem]">
+            <img src={logo} alt="" />
+          </div>
         </Link>
         {showAuth && (
           <div>
