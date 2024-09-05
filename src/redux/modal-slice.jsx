@@ -6,6 +6,7 @@ const modalSlice = createSlice({
     createBloglIsShown: false,
     editBlogIsShown: false,
     userModalIsShown: false,
+    deleteBloglIsShown: false,
   },
   reducers: {
     showModal(state, action) {
@@ -18,6 +19,9 @@ const modalSlice = createSlice({
       if (action.payload === "user") {
         state.userModalIsShown = true;
       }
+      if (action.payload === "deleteBlog") {
+        state.deleteBloglIsShown = true;
+      }
     },
     hideModal(state, action) {
       if (action.payload === "createBlog") {
@@ -28,6 +32,9 @@ const modalSlice = createSlice({
       }
       if (action.payload === "user") {
         state.userModalIsShown = false;
+      }
+      if (action.payload === "deleteBlog") {
+        state.deleteBloglIsShown = false;
       }
     },
   },

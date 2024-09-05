@@ -11,8 +11,6 @@ const UserProfilePage = () => {
 
   const { user } = useRouteLoaderData("root");
 
-  console.log(user);
-
   const errors = useActionData();
 
   useEffect(() => {

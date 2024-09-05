@@ -7,15 +7,20 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import Blog from "../components/Blog";
 const EditBlogForm = lazy(() => import("../components/EditBlogForm"));
 import { modalActions } from "../redux/store";
+import DeleteBlogPopup from "../components/DeleteBlogPopup";
 
 const MyBlogsPage = () => {
   const { blogs: blogsData, user } = useRouteLoaderData("root");
 
   const [blogId, setBlogId] = useState();
+  const [blogTitle, setBlogTitle] = useState();
 
   const dispatch = useDispatch();
 
   const editBlogIsShown = useSelector((state) => state.modal.editBlogIsShown);
+  const deleteBloglIsShown = useSelector(
+    (state) => state.modal.deleteBloglIsShown
+  );
 
   const submit = useSubmit();
 
@@ -38,17 +43,22 @@ const MyBlogsPage = () => {
     setBlogId(blogId);
   };
 
-  const deletBlogHandler = (blogId) => {
-    const confirmed = window.confirm("Are you sure?");
+  const deletePopupHandler = (blogId, blogTitle) => {
+    setBlogTitle(blogTitle);
+    setBlogId(blogId);
 
-    if (confirmed) {
-      const formData = new FormData();
+    dispatch(modalActions.showModal("deleteBlog"));
+  };
 
-      formData.append("blogId", blogId);
-      formData.append("intent", "delete");
+  const deleteBlogHandler = () => {
+    console.log(blogId);
 
-      submit(formData, { method: "post" });
-    }
+    const formData = new FormData();
+
+    formData.append("blogId", blogId);
+    formData.append("intent", "delete");
+
+    submit(formData, { method: "post" });
   };
 
   return (
@@ -79,7 +89,7 @@ const MyBlogsPage = () => {
                       </button>
                       <button
                         className="btn-white"
-                        onClick={() => deletBlogHandler(blog.id)}
+                        onClick={() => deletePopupHandler(blog.id, blog.title)}
                       >
                         Delete
                       </button>
@@ -99,6 +109,12 @@ const MyBlogsPage = () => {
                         blogId={blogId}
                       />
                     </Suspense>
+                  )}
+                  {deleteBloglIsShown && (
+                    <DeleteBlogPopup
+                      blogTitle={blogTitle}
+                      onDelete={deleteBlogHandler}
+                    />
                   )}
                 </AnimatePresence>
                 <ul className="grid md:grid-cols-2 place-items-center gap-3 mb-5">
