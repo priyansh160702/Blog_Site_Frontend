@@ -33,8 +33,6 @@ const passwordRecoveryAction = async ({ request, params }) => {
 
   const resData = await response.json();
 
-  console.log(resData);
-
   if (resData.hasOwnProperty("errors")) {
     const { message } = resData.errors[0];
 
@@ -46,7 +44,7 @@ const passwordRecoveryAction = async ({ request, params }) => {
   if (response.ok) {
     const { message } = resData.data.forgotPassword;
 
-    window.alert(message);
+    return { success: true, message };
   }
 
   return null;
