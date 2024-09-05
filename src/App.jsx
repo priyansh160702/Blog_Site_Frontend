@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { Fragment, lazy, Suspense, useEffect, useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import RootLayout from "./components/Rootlayout";
@@ -21,6 +21,7 @@ import passwordRecoveryAction from "./util/actions/PasswordRecoveryAction";
 import resetPasswordAcion from "./util/actions/ResetPasswordAction";
 import profilePhotoAction from "./util/actions/ProfilePhotoAction";
 import blogAction from "./util/actions/blogAction";
+import SplashScreen from "./components/SplashScreen";
 
 // Router
 const router = createBrowserRouter([
@@ -121,7 +122,21 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  const [showSplashScreen, setShowSplashScreen] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplashScreen(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <Fragment>
+      {showSplashScreen ? <SplashScreen /> : <RouterProvider router={router} />}
+    </Fragment>
+  );
 }
 
 export default App;
