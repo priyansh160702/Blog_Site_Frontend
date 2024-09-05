@@ -7,6 +7,7 @@ import useDocumentTitle from "../util/hooks/use-documentTitle";
 import Navbar from "./Navbar";
 import CreateBlogForm from "./CreateBlogForm";
 import UserModal from "./UserModal";
+import SessionTimeOutPopup from "./SessionTimeOutPopup";
 
 const RootLayout = () => {
   const location = useLocation();
@@ -15,6 +16,7 @@ const RootLayout = () => {
     (state) => state.modal.createBloglIsShown
   );
   const userModalIsShown = useSelector((state) => state.modal.userModalIsShown);
+  const sessionTimeOut = useSelector((state) => state.modal.sessionTimeOut);
 
   // Scroll Restoration
   useEffect(() => {
@@ -46,6 +48,7 @@ const RootLayout = () => {
       <AnimatePresence>
         {createBloglIsShown && <CreateBlogForm />}
         {userModalIsShown && <UserModal />}
+        {sessionTimeOut && <SessionTimeOutPopup />}
       </AnimatePresence>
       <main>
         <Outlet />

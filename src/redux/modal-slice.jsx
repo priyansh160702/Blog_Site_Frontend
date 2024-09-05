@@ -7,6 +7,7 @@ const modalSlice = createSlice({
     editBlogIsShown: false,
     userModalIsShown: false,
     deleteBloglIsShown: false,
+    sessionTimeOut: false,
   },
   reducers: {
     showModal(state, action) {
@@ -22,6 +23,9 @@ const modalSlice = createSlice({
       if (action.payload === "deleteBlog") {
         state.deleteBloglIsShown = true;
       }
+      if (action.payload === "sessionTimeout") {
+        state.sessionTimeOut = true;
+      }
     },
     hideModal(state, action) {
       if (action.payload === "createBlog") {
@@ -35,6 +39,9 @@ const modalSlice = createSlice({
       }
       if (action.payload === "deleteBlog") {
         state.deleteBloglIsShown = false;
+      }
+      if (action.payload === "sessionTimeout") {
+        state.sessionTimeOut = false;
       }
     },
   },

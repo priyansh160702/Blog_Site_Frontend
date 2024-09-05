@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
+import { modalActions } from "../../redux/store";
 
 const useAuthentication = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -8,6 +10,8 @@ const useAuthentication = () => {
   );
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const updateAuthState = () => {
     setIsAuthenticated(!!localStorage.getItem("token"));
@@ -23,15 +27,17 @@ const useAuthentication = () => {
       const remainingTime = expirationTime - currentTime;
 
       if (remainingTime > 0) {
-        setTimeout(() => {
-          logout();
+        const timeoutId = setTimeout(() => {
           navigate("/");
-          window.alert("Your session timed out!");
+          dispatch(modalActions.showModal("sessionTimeout"));
+          logout();
         }, remainingTime);
+
+        return () => clearTimeout(timeoutId);
       } else {
-        logout();
         navigate("/");
-        window.alert("Your session timed out!");
+        dispatch(modalActions.showModal("sessionTimeout"));
+        logout();
       }
     }
   }, [isAuthenticated]);
