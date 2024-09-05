@@ -26,11 +26,13 @@ const BlogPage = () => {
     <Fragment>
       <main>
         <div className="container text-center">
-          <img
-            className="w-full h-[30rem] mx-auto"
-            src={`${api_url}/${image}`}
-            alt=""
-          />
+          {image && (
+            <img
+              className="w-full h-[30rem] mx-auto"
+              src={`${api_url}/${image}`}
+              alt=""
+            />
+          )}
           <div className="mt-5">
             {/* <h2 className="">{category}</h2> */}
             <h1 className="title">{title}</h1>

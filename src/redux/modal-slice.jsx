@@ -11,37 +11,41 @@ const modalSlice = createSlice({
   },
   reducers: {
     showModal(state, action) {
-      if (action.payload === "createBlog") {
-        state.createBloglIsShown = true;
-      }
-      if (action.payload === "editBlog") {
-        state.editBlogIsShown = true;
-      }
-      if (action.payload === "user") {
-        state.userModalIsShown = true;
-      }
-      if (action.payload === "deleteBlog") {
-        state.deleteBloglIsShown = true;
-      }
-      if (action.payload === "sessionTimeout") {
-        state.sessionTimeOut = true;
+      switch (action.payload) {
+        case "createBlog":
+          state.createBloglIsShown = true;
+          break;
+        case "editBlog":
+          state.editBlogIsShown = true;
+          break;
+        case "user":
+          state.userModalIsShown = true;
+          break;
+        case "deleteBlog":
+          state.deleteBloglIsShown = true;
+          break;
+        case "sessionTimeout":
+          state.sessionTimeOut = true;
+          break;
       }
     },
     hideModal(state, action) {
-      if (action.payload === "createBlog") {
-        state.createBloglIsShown = false;
-      }
-      if (action.payload === "editBlog") {
-        state.editBlogIsShown = false;
-      }
-      if (action.payload === "user") {
-        state.userModalIsShown = false;
-      }
-      if (action.payload === "deleteBlog") {
-        state.deleteBloglIsShown = false;
-      }
-      if (action.payload === "sessionTimeout") {
-        state.sessionTimeOut = false;
+      switch (action.payload) {
+        case "createBlog":
+          state.createBloglIsShown = false;
+          break;
+        case "editBlog":
+          state.editBlogIsShown = false;
+          break;
+        case "user":
+          state.userModalIsShown = false;
+          break;
+        case "deleteBlog":
+          state.deleteBloglIsShown = false;
+          break;
+        case "sessionTimeout":
+          state.sessionTimeOut = false;
+          break;
       }
     },
   },
