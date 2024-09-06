@@ -11,7 +11,7 @@ const ModalOverlay = ({ children, className }) => {
       variants={{
         visible: {
           opacity: 1,
-          y: 60,
+          y: 100,
           transition: { type: "spring", duration: "1" },
         },
         hidden: { opacity: 0, y: -1, transition: { type: "tween" } },
