@@ -55,7 +55,7 @@ const UserProfilePage = () => {
   }
 
   return (
-    <main className="container">
+    <main className="container pl-5 md:pl-0">
       <h1 className="mb-4 font-semibold text-3xl">Account Settings</h1>
       <div className="flex space-x-7 text-lg mb-3">
         {tabContent.map((tab, index) => (
