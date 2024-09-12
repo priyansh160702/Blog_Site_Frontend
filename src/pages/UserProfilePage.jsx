@@ -1,11 +1,15 @@
-import { useEffect, useState, useRef } from "react";
-import { Form, useRouteLoaderData, useActionData } from "react-router-dom";
-import { Avatar } from "flowbite-react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
+import { useRouteLoaderData, useActionData } from "react-router-dom";
+
+import UserInfoTab from "../components/UserProfile/UserInfoTab";
+const ProfilePhotoTab = lazy(() =>
+  import("../components/UserProfile/ProfilePhotoTab")
+);
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const UserProfilePage = () => {
-  const api_url = import.meta.env.VITE_API_URL;
-
   const [profilePhotoError, setProfilePhotoError] = useState(null);
+  const [activeTab, setActiveTab] = useState(0);
 
   const formRef = useRef();
 
@@ -27,44 +31,44 @@ const UserProfilePage = () => {
     }
   }, [errors]);
 
+  const tabContent = [
+    {
+      title: "Profile Settings",
+      component: <UserInfoTab user={user} />,
+    },
+    {
+      title: "Profile Picture",
+      component: (
+        <Suspense fallback={<LoadingSpinner />}>
+          <ProfilePhotoTab user={user} profilePhotoError={profilePhotoError} />
+        </Suspense>
+      ),
+    },
+  ];
+
+  const tabClickHandler = (index) => {
+    setActiveTab(index);
+  };
+
   if (!user) {
     return;
   }
 
   return (
     <main className="container">
-      <div className=" flex flex-col items-center space-y-10">
-        <div className="flex flex-col space-y-7">
-          <Avatar
-            img={user.profilePhoto ? `${api_url}/${user.profilePhoto}` : null}
-            rounded
-            size="lg"
-          />
-          <Form method="post" encType="multipart/form-data" ref={formRef}>
-            <div className="flex flex-col items-center justify-center ">
-              <div>
-                <input type="file" name="profilePhoto" className="ml-[8rem]" />
-                {profilePhotoError && (
-                  <p className="text-red-500 mt-1 text-center">
-                    {profilePhotoError}
-                  </p>
-                )}
-              </div>
-              <button type="submit" className="btn-black mt-5">
-                Upload
-              </button>
-            </div>
-          </Form>
-        </div>
-        <div className="space-y-2">
-          <h1>
-            <span className="font-bold">Name:</span> {user.name}
-          </h1>
-          <h1>
-            <span className="font-bold">Email:</span> {user.email}
-          </h1>
-        </div>
+      <h1 className="mb-4 font-semibold text-3xl">Account Settings</h1>
+      <div className="flex space-x-7 text-lg mb-3">
+        {tabContent.map((tab, index) => (
+          <button
+            key={index}
+            className={`tab-btn ${index === activeTab ? "active-tab" : ""}`}
+            onClick={() => tabClickHandler(index)}
+          >
+            {tab.title}
+          </button>
+        ))}
       </div>
+      <div>{tabContent[activeTab].component}</div>
     </main>
   );
 };

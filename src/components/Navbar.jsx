@@ -38,7 +38,7 @@ const Navbar = ({ isErrorPage }) => {
   };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar shadow-md">
       <div className="container px-2 flex justify-between items-center md:px-0  ">
         <Link to="/">
           <div className="w-[6rem]">

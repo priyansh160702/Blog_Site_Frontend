@@ -93,3 +93,25 @@ body{
 .blog-category{
   @apply text-left rounded-md py-[1px] px-[5px] text-white w-fit
 }
+
+/* Tabs */
+.tab-btn {
+  position: relative;  
+  padding-bottom: 5px;  
+  transition: border-color 0.3s ease, padding-bottom 0.3s ease;  
+}
+
+.tab-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;  
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: transparent;  
+  transition: background-color 0.3s ease;  
+}
+
+.active-tab::after {
+  background-color: rgba(173, 39, 39, 0.938);  
+}
